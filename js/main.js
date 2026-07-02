@@ -138,7 +138,11 @@ function initHeroShader(canvas, staticFrame) {
   `;
 
   const fragment = `
+    #ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+    #else
     precision mediump float;
+    #endif
     uniform vec2 resolution;
     uniform float time;
     uniform vec2 pointer;  // 0..1 canvas space, y up; rests at center
