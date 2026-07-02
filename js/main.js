@@ -147,24 +147,16 @@ function initHeroShader(canvas, staticFrame) {
     uniform float time;
     uniform vec2 pointer;  // 0..1 canvas space, y up; rests at center
     uniform float scroll;  // 0..1, hero scrolled out of view
+    uniform sampler2D noiseTex; // 256x256 CPU-seeded random, LINEAR + REPEAT
 
-    /* sin()-free hash: portable across ANGLE/driver backends (large-arg
-       sin() loses precision on some integrated-GPU paths and washes out) */
-    float hash(vec2 p) {
-      p = fract(p * vec2(123.34, 456.21));
-      p += dot(p, p + 45.32);
-      return fract(p.x * p.y);
-    }
-
+    /* value noise via texture lookup: the random data comes from the CPU
+       (identical bytes on every device/browser), the GPU only interpolates.
+       No GPU math hash -> no driver/precision divergence anywhere. */
     float vnoise(vec2 p) {
       vec2 i = floor(p);
       vec2 f = fract(p);
-      vec2 u = f * f * (3.0 - 2.0 * f);
-      return mix(
-        mix(hash(i), hash(i + vec2(1.0, 0.0)), u.x),
-        mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x),
-        u.y
-      );
+      f = f * f * (3.0 - 2.0 * f);
+      return texture2D(noiseTex, (i + f + 0.5) / 256.0).r;
     }
 
     float fbm(vec2 p) {
@@ -196,6 +188,8 @@ function initHeroShader(canvas, staticFrame) {
         fbm(p + 2.4 * q + vec2(8.3, 2.8) - t * 0.4)
       );
       float f = fbm(p + 2.6 * r);
+      // fbm clusters around 0.5: stretch it (biased up) so the palette gets full range
+      f = clamp((f - 0.48) * 2.4 + 0.58, 0.0, 1.0);
 
       // brand palette only: lilac field, malva pools, roxo depth, laranja heat, cream lifts
       vec3 lilac   = vec3(0.906, 0.855, 0.945);
@@ -204,23 +198,23 @@ function initHeroShader(canvas, staticFrame) {
       vec3 laranja = vec3(1.000, 0.282, 0.090);
       vec3 cream   = vec3(0.973, 0.953, 0.933);
 
-      vec3 color = mix(lilac, malva, smoothstep(0.25, 0.72, f));
-      color = mix(color, roxo, smoothstep(0.62, 0.95, f) * 0.55 * smoothstep(0.35, 0.75, q.y));
+      vec3 color = mix(lilac, malva, smoothstep(0.0, 0.58, f));
+      color = mix(color, roxo, smoothstep(0.62, 0.95, f) * 0.55 * smoothstep(0.42, 0.58, q.y));
       // laranja lives on the thin transition ridges, like the hot edges in the reference
-      float ridge = smoothstep(0.10, 0.0, abs(f - 0.48)) * smoothstep(0.25, 0.65, r.x);
+      float ridge = smoothstep(0.10, 0.0, abs(f - 0.48)) * smoothstep(0.42, 0.55, r.x);
       color = mix(color, laranja, ridge * 0.85);
       // vertical brand read: warmth gathers toward the bottom
-      color = mix(color, laranja, smoothstep(0.45, 0.0, uv.y) * smoothstep(0.3, 0.7, q.x) * 0.4);
+      color = mix(color, laranja, smoothstep(0.45, 0.0, uv.y) * smoothstep(0.42, 0.56, q.x) * 0.4);
       // cream lifts in the low-density valleys
-      color = mix(color, cream, smoothstep(0.34, 0.12, f) * 0.6);
+      color = mix(color, cream, smoothstep(0.28, 0.08, f) * 0.3);
       // soft light following the cursor (pointer rests at center when idle)
       float pd = distance(uv * vec2(resolution.x / resolution.y, 1.0), pointer * vec2(resolution.x / resolution.y, 1.0));
-      color = mix(color, cream, smoothstep(0.5, 0.0, pd) * 0.10);
+      color = mix(color, cream, smoothstep(0.5, 0.0, pd) * 0.07);
       // scrolling out warms the field toward laranja
       color = mix(color, laranja, scroll * 0.15);
 
-      // film grain, animated per-frame
-      float grain = hash(gl_FragCoord.xy + fract(time) * 61.7) - 0.5;
+      // film grain from the same texture, drifting per-frame
+      float grain = texture2D(noiseTex, gl_FragCoord.xy / 256.0 + fract(time) * vec2(0.37, 0.71)).r - 0.5;
       color += grain * 0.055;
 
       gl_FragColor = vec4(color, 1.0);
@@ -254,6 +248,27 @@ function initHeroShader(canvas, staticFrame) {
   const timeLoc = gl.getUniformLocation(program, "time");
   const pointerLoc = gl.getUniformLocation(program, "pointer");
   const scrollLoc = gl.getUniformLocation(program, "scroll");
+
+  // seeded PRNG (mulberry32): every visitor gets the exact same noise field
+  function mulberry32(seed) {
+    return function () {
+      seed = (seed + 0x6d2b79f5) | 0;
+      let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  const rand = mulberry32(1291816);
+  const noiseData = new Uint8Array(256 * 256);
+  for (let i = 0; i < noiseData.length; i++) noiseData[i] = rand() * 256;
+  const noiseTexture = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, noiseTexture);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.LUMINANCE, 256, 256, 0, gl.LUMINANCE, gl.UNSIGNED_BYTE, noiseData);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  gl.uniform1i(gl.getUniformLocation(program, "noiseTex"), 0);
 
   // pointer target in canvas space (0..1, y up), eased each frame; center when idle
   let pointerX = 0.5, pointerY = 0.5;
