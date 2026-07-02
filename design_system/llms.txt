@@ -1,0 +1,29 @@
+# ELEVO Design System
+
+> ELEVO is a strategic innovation studio (Londrina/PR) targeting founders and CEOs of R$1M-R$50M B2B companies hitting a growth ceiling. The visual system fuses the brand's own asymmetric cut-corner module language with a role-swapping Malva/Roxo palette, B&W photography, and a single-family Hanken Grotesk type scale keyed to brand-mandated percentages (100/40/30/20). Implementation constraint: it's a mobile-first, one-page conversion landing (WhatsApp + Google Agenda), not a dashboard or app.
+
+This design system is the local source of truth for UI generation in this repo.
+Before writing UI, read the required files below in order. Use semantic tokens
+from `tokens.css`; do not invent visual values.
+
+## Required
+- [Runtime briefing](DESIGN.md): concise rules for agents before UI work
+- [Token reference](specs/tokens/token-reference.md): every public token and when to use it
+- [Color](specs/foundations/color.md): palette, role-swap contrast, and color usage rules
+- [Typography](specs/foundations/typography.md): single-family type roles and the 100/40/30/20 scale
+- [Shape](specs/foundations/shape.md): the signature cut-corner system - what gets cut, what never does
+- [Spacing](specs/foundations/spacing.md): 8px component scale + brand ÷16 grid module
+- [Components](specs/components-index.md): component specs available in this system
+- [Patterns](specs/patterns-index.md): section rhythm and responsive grid rules
+
+## Enforcement
+- [Token audit](scripts/token-audit.js): flags hardcoded visual values
+- [Accessibility](specs/foundations/accessibility.md): contrast, focus, touch targets, reduced motion
+- [Breakpoints](specs/foundations/breakpoints.md): mobile-first 375/768/1024/1280
+
+## Optional
+- [Visual showcase](showcase.html): human-facing dashboard for design review
+- [Motion](specs/foundations/motion.md): reveal/hover/hero motion rules
+- [DTCG tokens](tokens.dtcg.json): vendor-neutral token export
+- [Figma tokens](tokens.json): Figma Variables-ready token export
+- [Color tokens](specs/tokens/color-tokens.md) / [Typography tokens](specs/tokens/typography-tokens.md) / [Spacing tokens](specs/tokens/spacing-tokens.md) / [Motion tokens](specs/tokens/motion-tokens.md)

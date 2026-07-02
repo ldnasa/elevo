@@ -1,0 +1,1432 @@
+<!doctype html>
+<html lang="pt-BR" class="theme-dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ELEVO Design System - Estrutura em Movimento v1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+/* ELEVO Design System - Estrutura em Movimento v1
+   Chassis adapted from ds-builder skeleton. Brand tokens from my_brand_assets/.
+   Inlined copy of showcase.css - edit showcase.css and re-inline, don't hand-edit here. */
+
+:root,
+.theme-dark {
+  /* - LAYER 1: PRIMITIVES (exact brand hex, never edited) - */
+  --primitive-malva: #b882e8;
+  --primitive-roxo: #2f1533;
+  --primitive-cinza: #edeae5;
+  --primitive-laranja: #ff4817;
+  --primitive-grafite: #0f0f0f;
+
+  --primitive-neutral-50: #f7f5f2;
+  --primitive-neutral-100: #edeae5;
+  --primitive-neutral-200: #ddd8d0;
+  --primitive-neutral-300: #c3bcb0;
+  --primitive-neutral-400: #a89f91;
+  --primitive-neutral-500: #8b8175;
+  --primitive-neutral-600: #6f665c;
+  --primitive-neutral-700: #4a4340;
+  --primitive-neutral-800: #2b2724;
+  --primitive-neutral-900: #0f0f0f;
+
+  --primitive-success: #5b9e73;
+  --primitive-warning: #d9a544;
+  --primitive-error: #d64545;
+
+  /* - LAYER 2: SEMANTIC ALIASES (dark theme = default) - */
+  --acc-malva: var(--primitive-malva);
+  --acc-laranja: var(--primitive-laranja);
+  --acc-cinza: var(--primitive-cinza);
+
+  --bg-primary: #2f1533;
+  --bg-secondary: #3a1a40;
+  --bg-tertiary: #451f4d;
+  --bg-elevated: #3d1c44;
+
+  --text-primary: #edeae5;
+  --text-secondary: rgba(237, 234, 229, .72);
+  --text-tertiary: rgba(237, 234, 229, .52);
+  --text-muted: rgba(237, 234, 229, .34);
+
+  --border-subtle: rgba(184, 130, 232, .10);
+  --border-default: rgba(184, 130, 232, .18);
+  --border-strong: rgba(184, 130, 232, .30);
+
+  --accent: var(--primitive-malva);
+  --accent-muted: rgba(184, 130, 232, .10);
+  --accent-soft: rgba(184, 130, 232, .20);
+  --text-on-accent: var(--primitive-roxo);
+
+  --secondary: var(--primitive-laranja);
+  --secondary-muted: rgba(255, 72, 23, .12);
+
+  --color-success: var(--primitive-success);
+  --color-warning: var(--primitive-warning);
+  --color-error: var(--primitive-error);
+
+  --glass-bg: rgba(237, 234, 229, .055);
+  --glass-strong: rgba(237, 234, 229, .09);
+  --shadow-card: 0 22px 44px -24px rgba(15, 5, 18, .8), 0 1px 0 rgba(237, 234, 229, .05) inset;
+
+  --font-display: "Hanken Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-ui: "Hanken Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* - TYPE SCALE (brand rule: title=100%, subtitle=40%, body=30%, detail=20%) - */
+  --text-hero: clamp(56px, 8vw, 120px);
+  --text-h2: clamp(34px, 4.4vw, 58px);
+  --text-h3: 22px;
+  --text-body: 17px;
+  --text-small: 14px;
+  --text-meta: 11px;
+
+  /* - SPACING (8px system) - */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  --sidebar: 280px;
+  --content-max: 1320px;
+  --section-x: clamp(32px, 5.8vw, 92px);
+  --section-y: clamp(84px, 8vw, 132px);
+
+  /* - RADIUS: soft scale for controls, cut system for signature cards - */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+  --cut: 26px;
+  --cut-lg: clamp(28px, 3vw, 56px);
+
+  /* - MOTION - */
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-medium: 400ms;
+  --duration-slow: 600ms;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+}
+
+.theme-light {
+  --bg-primary: #edeae5;
+  --bg-secondary: #f5f3ef;
+  --bg-tertiary: #e2ddd4;
+  --bg-elevated: #ffffff;
+
+  --text-primary: #2f1533;
+  --text-secondary: rgba(47, 21, 51, .72);
+  --text-tertiary: rgba(47, 21, 51, .52);
+  --text-muted: rgba(47, 21, 51, .36);
+
+  --border-subtle: rgba(47, 21, 51, .08);
+  --border-default: rgba(47, 21, 51, .14);
+  --border-strong: rgba(47, 21, 51, .24);
+
+  /* Brand color role-swap: Malva pops on dark, Roxo reads on light. Never both as competing accents. */
+  --accent: var(--primitive-roxo);
+  --accent-muted: rgba(47, 21, 51, .06);
+  --accent-soft: rgba(47, 21, 51, .12);
+  --text-on-accent: var(--primitive-cinza);
+
+  --secondary: var(--primitive-laranja);
+  --secondary-muted: rgba(255, 72, 23, .10);
+
+  --glass-bg: rgba(255, 255, 255, .70);
+  --glass-strong: rgba(255, 255, 255, .90);
+  --shadow-card: 0 18px 40px -30px rgba(47, 21, 51, .22), 0 1px 0 rgba(255, 255, 255, .9) inset;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 84% 14%, rgba(255, 72, 23, .16), transparent 34vw),
+    radial-gradient(circle at 12% 76%, rgba(184, 130, 232, .18), transparent 32vw),
+    var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .14;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.34'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+a { color: inherit; text-decoration: none; }
+button, input, select { font: inherit; color: inherit; }
+button { -webkit-tap-highlight-color: transparent; }
+
+.icon-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: none;
+}
+
+#shaderCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  opacity: .38;
+  pointer-events: none;
+}
+
+.theme-light #shaderCanvas {
+  opacity: .12;
+  filter: saturate(.6) contrast(.9);
+}
+
+/* - CUT-CORNER SIGNATURE SHAPE -
+   Brand's asymmetric module system (see my_brand_assets/formas-exemplo-elevo).
+   3 corners soft-rounded via border-radius, 1 corner cut sharp via clip-path.
+   Reserved for cards/media modules. Never applied to buttons, pills or inputs. */
+.cut-card {
+  border-radius: var(--radius-lg);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%);
+}
+.cut-card--tl {
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--cut));
+}
+.cut-card--lg { --cut: var(--cut-lg); }
+
+.shell {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: var(--sidebar) minmax(0, 1fr);
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  z-index: 10;
+  padding: 28px 22px;
+  border-right: 1px solid var(--border-subtle);
+  background: color-mix(in srgb, var(--bg-primary) 82%, transparent);
+  backdrop-filter: blur(22px) saturate(1.3);
+  display: flex;
+  flex-direction: column;
+}
+
+.brandmark {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 42px;
+}
+
+.sigil {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%);
+  border: 1px solid var(--border-strong);
+  background:
+    linear-gradient(135deg, var(--acc-malva), transparent 58%),
+    linear-gradient(315deg, var(--acc-laranja), transparent 62%),
+    var(--glass-bg);
+  box-shadow: var(--shadow-card);
+}
+
+.brandmark strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.05;
+  text-transform: lowercase;
+}
+
+.brandmark span span,
+.meta,
+.eyebrow,
+.nav a,
+.tile-index,
+.swatch em,
+.media-slot > span,
+.spec-row span,
+.module-grid span,
+.quality-grid span {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+.nav {
+  display: grid;
+  gap: 4px;
+}
+
+.nav a {
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border-radius: var(--radius-md);
+  transition: color var(--duration-base) var(--ease), background var(--duration-base) var(--ease), transform var(--duration-base) var(--ease);
+}
+
+.nav a:hover,
+.nav a.active {
+  color: var(--text-primary);
+  background: var(--accent-muted);
+  transform: translateX(2px);
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  display: grid;
+  gap: 12px;
+}
+
+.theme-toggle {
+  min-height: 44px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  background: var(--glass-bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  cursor: pointer;
+}
+
+.theme-light .sidebar { background: rgba(255, 255, 255, .82); }
+.theme-light .theme-toggle,
+.theme-light .btn.secondary,
+.theme-light input,
+.theme-light select,
+.theme-light .lucide-grid span {
+  background: rgba(255, 255, 255, .78);
+}
+
+main { min-width: 0; }
+
+.hero,
+.section {
+  padding: var(--section-y) var(--section-x);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.hero {
+  min-height: 100dvh;
+  max-width: calc(var(--content-max) + var(--section-x) * 2);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  gap: clamp(44px, 7vw, 96px);
+  align-items: center;
+}
+
+.section { max-width: calc(var(--content-max) + var(--section-x) * 2); }
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 18px;
+  color: var(--acc-malva);
+  text-transform: uppercase;
+  letter-spacing: .13em;
+  font-weight: 500;
+}
+
+.theme-light .eyebrow { color: var(--acc-laranja); }
+
+h1, h2, h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -.01em;
+  line-height: .98;
+  text-transform: lowercase; /* brand rule: titles are always lowercase */
+}
+
+h1 { max-width: 900px; font-size: var(--text-hero); }
+h2 { max-width: 820px; font-size: var(--text-h2); }
+h3 { font-size: var(--text-h3); line-height: 1.15; font-weight: 700; }
+
+p {
+  margin: 0;
+  max-width: 68ch;
+  color: var(--text-secondary);
+  line-height: 1.62;
+  text-transform: none;
+}
+
+.lead {
+  max-width: 720px;
+  margin-top: 24px;
+  font-size: clamp(18px, 1.8vw, 23px);
+  line-height: 1.4;
+}
+
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+
+.btn {
+  height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: var(--radius-pill);
+  padding: 0 20px;
+  border: 1px solid var(--border-default);
+  background: var(--glass-bg);
+  cursor: pointer;
+  white-space: nowrap;
+  line-height: 1;
+  text-transform: none;
+  transition: transform var(--duration-base) var(--ease), border-color var(--duration-base) var(--ease), background var(--duration-base) var(--ease), box-shadow var(--duration-base) var(--ease);
+}
+
+.btn:hover { transform: translateY(-2px); border-color: var(--border-strong); background: var(--glass-strong); box-shadow: var(--shadow-card); }
+.btn:active { transform: translateY(-1px) scale(.99); }
+.btn:focus-visible,
+input:focus-visible,
+select:focus-visible,
+.swatch:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.btn.primary { background: var(--accent); border-color: transparent; color: var(--text-on-accent); font-weight: 700; }
+.btn.secondary { background: var(--glass-bg); }
+.btn.tertiary { background: transparent; border-color: transparent; color: var(--text-secondary); }
+.btn:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; }
+
+.hero-panel { border-left: 1px solid var(--border-default); padding-left: 26px; }
+
+.hero-score {
+  margin-top: 16px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 82px;
+  line-height: .86;
+  color: var(--acc-malva);
+  text-transform: none;
+}
+.theme-light .hero-score { color: var(--acc-laranja); }
+
+.status-line, .bar-chart, .skeleton { overflow: hidden; background: var(--bg-tertiary); }
+.status-line { height: 8px; border-radius: var(--radius-pill); margin-top: 22px; }
+.status-line span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--acc-malva), var(--acc-laranja));
+}
+
+.section-header {
+  display: grid;
+  grid-template-columns: minmax(0, .92fr) minmax(280px, .48fr);
+  gap: clamp(28px, 6vw, 92px);
+  align-items: start;
+  margin-bottom: clamp(40px, 5vw, 72px);
+}
+.section-header > p { padding-top: 30px; font-size: 16px; }
+
+.principle-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+
+.rule-tile {
+  min-height: 228px;
+  padding: 28px;
+  border: 1px solid var(--border-subtle);
+  background: color-mix(in srgb, var(--bg-secondary) 86%, transparent);
+  display: grid;
+  align-content: space-between;
+  gap: 28px;
+  box-shadow: 0 1px 0 rgba(237, 234, 229, .04) inset;
+}
+
+.tile-index { color: var(--acc-malva); font-weight: 500; }
+.theme-light .tile-index { color: var(--acc-laranja); }
+.rule-tile h3 { margin-bottom: 8px; }
+
+.theme-light .rule-tile,
+.theme-light .module-grid article,
+.theme-light .quality-grid article,
+.theme-light .brandos-map article,
+.theme-light .state-card,
+.theme-light .motion-demo {
+  background: rgba(255, 255, 255, .74);
+  box-shadow: 0 18px 38px -34px rgba(47, 21, 51, .18), 0 1px 0 rgba(255, 255, 255, .82) inset;
+}
+
+.module-grid, .quality-grid, .brandos-map {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.module-grid article, .quality-grid article, .brandos-map article {
+  min-height: 144px;
+  padding: 22px;
+  border: 1px solid var(--border-subtle);
+  display: grid;
+  align-content: space-between;
+  gap: 18px;
+  background: color-mix(in srgb, var(--bg-primary) 91%, transparent);
+}
+
+.module-grid strong, .quality-grid strong, .brandos-map strong {
+  color: var(--text-primary);
+  font-size: 15px;
+  line-height: 1.35;
+  text-transform: none;
+}
+
+.quality-grid em { font-style: normal; font-family: var(--font-mono); font-size: 11px; color: var(--acc-malva); }
+.theme-light .quality-grid em { color: var(--acc-laranja); }
+
+.color-layout, .type-layout, .component-layout, .asset-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, .42fr);
+  gap: 34px;
+  align-items: start;
+}
+
+.swatch-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+
+.swatch {
+  min-height: 166px;
+  border: 1px solid var(--border-subtle);
+  background: color-mix(in srgb, var(--bg-secondary) 86%, transparent);
+  padding: 14px;
+  display: grid;
+  align-content: space-between;
+  text-align: left;
+  cursor: pointer;
+}
+
+.swatch span { display: block; height: 72px; border-radius: var(--radius-md); border: 1px solid rgba(237, 234, 229, .16); }
+.swatch strong { margin-top: 18px; text-transform: none; }
+.swatch em { display: block; margin-top: 4px; font-style: normal; }
+.swatch.copied em { color: var(--color-success); }
+
+.usage-panel, .brandos-preview, .icon-library, .prompt-bank article {
+  border: 1px solid var(--border-default);
+  background: var(--glass-bg);
+  backdrop-filter: blur(22px) saturate(1.3);
+  box-shadow: var(--shadow-card);
+}
+
+.theme-light .usage-panel,
+.theme-light .brandos-preview,
+.theme-light .icon-library,
+.theme-light .prompt-bank article {
+  background: rgba(255, 255, 255, .8);
+}
+
+.usage-panel { position: sticky; top: 28px; padding: 22px; }
+.usage-panel h3 { margin-bottom: 14px; text-transform: none; }
+.spec-row { display: grid; grid-template-columns: 96px 1fr; gap: 18px; padding: 14px 0; border-top: 1px solid var(--border-subtle); }
+.spec-row strong { color: var(--text-primary); font-size: 14px; line-height: 1.4; text-transform: none; }
+
+.type-layout { grid-template-columns: minmax(0, 1fr) 360px; }
+.type-samples { display: grid; gap: 30px; }
+.type-samples article { padding-bottom: 28px; border-bottom: 1px solid var(--border-subtle); }
+.sample-display, .sample-ui, .sample-mono { margin-top: 14px; color: var(--text-primary); }
+.sample-display {
+  max-width: 920px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(42px, 6vw, 84px);
+  line-height: .96;
+  text-transform: lowercase;
+}
+.sample-ui { max-width: 760px; font-size: clamp(20px, 2.4vw, 30px); font-weight: 500; line-height: 1.4; text-transform: none; }
+.sample-mono { font-family: var(--font-mono); font-size: clamp(15px, 1.6vw, 20px); color: var(--secondary); text-transform: none; }
+
+.component-layout { grid-template-columns: minmax(0, .88fr) minmax(360px, .56fr); }
+.component-stack { display: grid; gap: 18px; }
+.control-row { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.form-demo {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  padding: 22px;
+  border: 1px solid var(--border-subtle);
+  background: color-mix(in srgb, var(--bg-secondary) 86%, transparent);
+}
+.form-demo label { display: grid; gap: 8px; }
+.form-demo label:last-child { grid-column: 1 / -1; }
+.form-demo label span { font-size: 13px; color: var(--text-secondary); }
+
+input, select {
+  width: 100%;
+  height: 44px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  background: var(--glass-bg);
+  padding: 0 12px;
+}
+
+.has-error input { border-color: color-mix(in srgb, var(--color-error) 68%, var(--border-default)); }
+.has-error small { color: var(--color-error); font-size: 12px; }
+
+.state-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.state-card {
+  min-height: 186px;
+  padding: 18px;
+  border: 1px solid var(--border-subtle);
+  background: color-mix(in srgb, var(--bg-primary) 88%, transparent);
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+.state-card svg { color: var(--acc-malva); }
+.theme-light .state-card svg { color: var(--acc-laranja); }
+.state-card.error svg { color: var(--color-error); }
+.skeleton {
+  display: block;
+  width: 100%;
+  height: 46px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(90deg, var(--bg-tertiary), var(--glass-strong), var(--bg-tertiary));
+  background-size: 220% 100%;
+  animation: shimmer 1.7s linear infinite;
+}
+
+.brandos-preview { padding: 22px; display: grid; gap: 22px; }
+.preview-head, .metric-row, .asset-list div { display: flex; justify-content: space-between; gap: 18px; align-items: center; }
+.badge {
+  min-height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  padding: 0 12px;
+  border: 1px solid var(--border-default);
+  background: var(--accent-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+.metric-row { align-items: stretch; }
+.metric-row div { flex: 1; padding: 14px; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); }
+.metric-row span { display: block; font-family: var(--font-mono); font-size: 10px; color: var(--text-tertiary); margin-bottom: 8px; }
+.metric-row strong { font-family: var(--font-display); font-size: 38px; font-weight: 800; text-transform: none; }
+
+.bar-chart { height: 180px; border-radius: var(--radius-md); display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; align-items: end; padding: 16px; }
+.bar-chart i { display: block; border-radius: var(--radius-sm) var(--radius-sm) 2px 2px; background: linear-gradient(180deg, var(--secondary), var(--accent)); }
+
+.asset-list { display: grid; gap: 10px; }
+.asset-list div { min-height: 56px; justify-content: start; padding: 0 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: color-mix(in srgb, var(--bg-elevated) 58%, transparent); }
+.asset-list span { margin-left: auto; color: var(--text-tertiary); }
+
+.asset-layout { grid-template-columns: minmax(360px, .72fr) minmax(0, 1fr); }
+.icon-library { padding: 24px; }
+.library-head { margin-bottom: 24px; }
+.lucide-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.lucide-grid span {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background: color-mix(in srgb, var(--bg-primary) 62%, transparent);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+.lucide-grid svg { color: var(--acc-malva); }
+.theme-light .lucide-grid svg { color: var(--acc-laranja); }
+
+.media-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.media-slot {
+  min-height: 264px;
+  padding: 22px;
+  border: 1px solid var(--border-subtle);
+  display: grid;
+  align-content: end;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-secondary);
+}
+.media-slot::before { content: ""; position: absolute; inset: 0; opacity: .78; }
+.media-slot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(var(--border-subtle) 1px, transparent 1px), linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+  background-size: 18px 18px;
+  mask-image: linear-gradient(180deg, transparent, #000 44%);
+  opacity: .4;
+}
+.media-slot > * { position: relative; z-index: 1; }
+.media-slot > span { color: var(--acc-malva); text-transform: uppercase; letter-spacing: .12em; }
+.theme-light .media-slot > span { color: var(--acc-laranja); }
+
+.media-slot.photo::before {
+  background: radial-gradient(circle at 24% 20%, rgba(255, 72, 23, .22), transparent 24%), linear-gradient(135deg, rgba(15, 5, 18, .5), rgba(184, 130, 232, .28)), var(--bg-tertiary);
+  filter: saturate(0) contrast(1.08) brightness(.62);
+}
+.media-slot.illustration::before {
+  background: radial-gradient(circle at 70% 24%, rgba(184, 130, 232, .22), transparent 30%), conic-gradient(from 180deg at 52% 52%, transparent, rgba(255, 72, 23, .18), transparent, rgba(184, 130, 232, .22), transparent);
+}
+.media-slot.ai::before {
+  background: radial-gradient(circle at 64% 30%, rgba(255, 72, 23, .32), transparent 30%), radial-gradient(circle at 26% 74%, rgba(184, 130, 232, .34), transparent 34%), linear-gradient(135deg, #2f1533, #451f4d);
+}
+.media-slot.pattern::before {
+  background: repeating-linear-gradient(135deg, rgba(184, 130, 232, .14) 0 1px, transparent 1px 12px), radial-gradient(circle at 50% 50%, rgba(255, 72, 23, .16), transparent 34%);
+}
+
+.prompt-bank { margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.prompt-bank article { padding: 18px; }
+.prompt-card.global-direction { grid-column: 1 / -1; }
+.prompt-text {
+  white-space: pre-wrap;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  background: color-mix(in srgb, var(--bg-primary) 70%, transparent);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  margin: 8px 0 14px;
+}
+
+.motion-toolbar { display: flex; align-items: center; gap: 16px; margin-bottom: 18px; }
+.motion-lab { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.motion-demo {
+  min-height: 270px;
+  padding: 20px;
+  border: 1px solid var(--border-subtle);
+  background: color-mix(in srgb, var(--bg-secondary) 86%, transparent);
+  display: grid;
+  align-content: space-between;
+  gap: 18px;
+  overflow: hidden;
+  position: relative;
+}
+
+.magnetic-button {
+  height: 46px;
+  width: max-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 18px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-default);
+  background: var(--accent);
+  color: var(--text-on-accent);
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform var(--duration-base) var(--ease);
+}
+.magnetic-button:hover { transform: translateY(-3px); }
+.mini-stack { display: grid; gap: 10px; margin: 18px 0; }
+.mini-stack i { display: block; height: 42px; border-radius: var(--radius-md); background: linear-gradient(90deg, var(--accent-muted), var(--secondary-muted)); border: 1px solid var(--border-subtle); }
+
+.word-demo { display: flex; flex-wrap: wrap; gap: 8px; font-family: var(--font-display); font-weight: 800; font-size: 38px; line-height: .96; text-transform: lowercase; }
+
+#miniShader { width: 100%; height: 110px; border-radius: var(--radius-md); background: linear-gradient(135deg, var(--accent-muted), var(--secondary-muted)); }
+
+.motion-lab.is-playing .mini-stack i,
+.motion-lab.is-playing .word-demo span { animation: fadeUp 700ms var(--ease) both; }
+.motion-lab.is-playing .mini-stack i:nth-child(2) { animation-delay: 90ms; }
+.motion-lab.is-playing .mini-stack i:nth-child(3) { animation-delay: 180ms; }
+.motion-lab.is-playing .word-demo span:nth-child(2) { animation-delay: 70ms; }
+.motion-lab.is-playing .word-demo span:nth-child(3) { animation-delay: 140ms; }
+.motion-lab.is-playing .magnetic-button { animation: pressPreview 800ms var(--ease) both; }
+
+.anti-list { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.anti-list span {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-pill);
+  padding: 0 12px;
+  border: 1px solid var(--border-subtle);
+  background: var(--glass-bg);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+/* - OS section blocks - */
+.brandos-narrative, .heuristics-block, .anti-generic-block, .brandos-map { margin-top: clamp(36px, 4vw, 56px); }
+.brandos-narrative h3, .heuristics-block h3, .anti-generic-block h3 { margin-bottom: 20px; text-transform: none; }
+
+.narrative-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.narrative-grid article {
+  padding: 18px;
+  border: 1px solid var(--border-subtle);
+  background: color-mix(in srgb, var(--bg-secondary) 86%, transparent);
+}
+
+.heuristic-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.heuristic-list article { padding: 18px; border: 1px solid var(--border-subtle); background: color-mix(in srgb, var(--bg-primary) 90%, transparent); }
+.heuristic-list h4 { margin: 0 0 8px; font-size: 15px; font-weight: 700; text-transform: none; }
+
+.guardrail-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.guardrail-list li {
+  padding: 14px 16px;
+  border: 1px solid var(--border-subtle);
+  background: color-mix(in srgb, var(--bg-secondary) 84%, transparent);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+.guardrail-list li strong { color: var(--acc-laranja); text-transform: none; }
+
+.final-section { padding-bottom: clamp(120px, 13vw, 190px); }
+
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 560ms var(--ease), transform 560ms var(--ease); }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+@keyframes shimmer { to { background-position: -220% 0; } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pressPreview {
+  0% { transform: translateY(0); }
+  35% { transform: translateY(-4px); }
+  70% { transform: translateY(-1px) scale(.99); }
+  100% { transform: translateY(0); }
+}
+
+@media (max-width: 1180px) {
+  .shell { grid-template-columns: 1fr; }
+  .sidebar {
+    position: fixed;
+    inset: auto 14px 14px 14px;
+    height: auto;
+    padding: 10px;
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-lg);
+    flex-direction: row;
+    align-items: center;
+  }
+  .brandmark, .sidebar .meta { display: none; }
+  .nav { display: flex; gap: 2px; overflow-x: auto; flex: 1; scrollbar-width: none; }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a { min-height: 40px; white-space: nowrap; padding: 0 10px; }
+  .sidebar-footer { margin: 0; }
+  .theme-toggle { width: auto; min-width: 96px; }
+  .theme-toggle span { display: none; }
+  .hero, .section { max-width: none; }
+  .hero { min-height: 100dvh; padding-bottom: 104px; }
+}
+
+@media (max-width: 980px) {
+  :root { --section-x: 24px; --section-y: 78px; }
+  .hero, .section-header, .color-layout, .type-layout, .component-layout, .asset-layout {
+    grid-template-columns: 1fr;
+  }
+  .hero-panel { border-left: 0; border-top: 1px solid var(--border-default); padding-left: 0; padding-top: 24px; }
+  .section-header > p { padding-top: 0; }
+  .usage-panel { position: static; }
+  .principle-grid, .module-grid, .quality-grid, .brandos-map, .motion-lab, .narrative-grid, .heuristic-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  :root { --section-x: 22px; --section-y: 66px; }
+  .lead { font-size: 18px; }
+  .hero-actions .btn { flex: 1 1 0; padding: 0 12px; }
+  .principle-grid, .module-grid, .quality-grid, .brandos-map, .swatch-grid, .state-grid,
+  .lucide-grid, .media-grid, .prompt-bank, .motion-lab, .narrative-grid, .heuristic-list {
+    grid-template-columns: 1fr;
+  }
+  .form-demo { grid-template-columns: 1fr; }
+  .metric-row { flex-direction: column; }
+  .sidebar { inset: auto 12px 12px 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .001ms !important;
+  }
+}
+  </style>
+</head>
+<body>
+  <svg aria-hidden="true" class="icon-sprite">
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="m6 6 12 12"/><path d="m18 6-12 12"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v1"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4"/><path d="m7 9 5-5 5 5"/><path d="M4 20h16"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/></symbol>
+    <symbol id="i-external-link" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+    <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 22a10 10 0 1 1 10-10 3 3 0 0 1-3 3h-2.2a2 2 0 0 0-1.7 3.1 2.6 2.6 0 0 1-2.1 3.9z"/><circle cx="7.5" cy="10" r="1"/><circle cx="10.5" cy="6.5" r="1"/><circle cx="15" cy="7.5" r="1"/></symbol>
+    <symbol id="i-type" viewBox="0 0 24 24"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></symbol>
+    <symbol id="i-layout-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8" cy="10" r="1.5"/><path d="m21 16-5-5L5 19"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1A2 2 0 1 1 4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1A2 2 0 1 1 7 4.2l.1.1a1.7 1.7 0 0 0 1.9.3h.1a1.7 1.7 0 0 0 .9-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h.1a1.7 1.7 0 0 0 1.9-.3l.1-.1A2 2 0 1 1 19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9v.1a1.7 1.7 0 0 0 1.5.9h.1a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></symbol>
+    <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="m12 3 1.7 5.1L19 10l-5.3 1.9L12 17l-1.7-5.1L5 10l5.3-1.9L12 3z"/><path d="m19 15 .8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15z"/><path d="m5 4 .7 1.8L7.5 6.5l-1.8.7L5 9l-.7-1.8-1.8-.7 1.8-.7L5 4z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7V5z"/></symbol>
+    <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h6"/></symbol>
+    <symbol id="i-message-circle" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></symbol>
+    <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  </svg>
+
+  <canvas id="shaderCanvas" aria-hidden="true"></canvas>
+
+  <div class="shell">
+    <aside class="sidebar">
+      <a class="brandmark" href="#top" aria-label="Voltar ao topo">
+        <span class="sigil"></span>
+        <span>
+          <strong>elevo DS</strong>
+          <span>Estrutura em Movimento v1</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Seções do showcase">
+        <a href="#foundation">Base</a>
+        <a href="#color">Color</a>
+        <a href="#type">Type</a>
+        <a href="#components">UI</a>
+        <a href="#motion">Motion</a>
+        <a href="#icons">Icons</a>
+        <a href="#assets">Assets</a>
+        <a href="#quality">QA</a>
+        <a href="#ai-gen">AI Gen</a>
+        <a href="#os">OS</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="theme-toggle" type="button" id="themeToggle">
+          <span>Theme</span>
+          <strong id="themeLabel">Dark</strong>
+        </button>
+        <span class="meta">Workbench antes do DESIGN.md oficial</span>
+      </div>
+    </aside>
+
+    <main id="top">
+      <section class="hero" data-section="hero">
+        <div class="hero-content reveal">
+          <span class="eyebrow">ELEVO Design System</span>
+          <h1 class="hero-title js-hero-title">Estrutura em Movimento v1</h1>
+          <p class="lead">Superfície de revisão para travar tokens, componentes, assets, motion e regras de qualidade antes da implementação do site.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#foundation">Revisar sistema <svg><use href="#i-arrow-right"/></svg></a>
+            <a class="btn secondary" href="#os">Mapa BrandOS <svg><use href="#i-layout-grid"/></svg></a>
+          </div>
+        </div>
+
+        <aside class="hero-panel reveal" aria-label="Status do design system">
+          <span class="meta">Workbench atual</span>
+          <div class="hero-score">11</div>
+          <p>Seções mapeadas do wireframe (Head + 11), cobertas por este sistema antes da implementação seção a seção.</p>
+          <div class="status-line"><span style="width: 68%"></span></div>
+        </aside>
+      </section>
+
+      <!-- ===================== 01 BASE ===================== -->
+      <section id="foundation" class="section">
+        <header class="section-header reveal">
+          <div>
+            <span class="eyebrow">01 Foundation</span>
+            <h2>corte, não canto redondo.</h2>
+          </div>
+          <p>A ELEVO já tem um manual de marca (my_brand_assets/). Este workbench traduz esse manual em decisões de UI, não reinventa a marca.</p>
+        </header>
+
+        <div class="principle-grid reveal">
+          <article class="rule-tile cut-card">
+            <span class="tile-index">01</span>
+            <h3>malva e roxo trocam de papel</h3>
+            <p>Malva acende sobre fundo escuro (roxo). Roxo assenta sobre fundo claro (cinza). Nunca os dois competindo como CTA na mesma composição.</p>
+          </article>
+          <article class="rule-tile cut-card cut-card--tl">
+            <span class="tile-index">02</span>
+            <h3>corte assimétrico é a forma da marca</h3>
+            <p>O módulo de composição da Elevo corta um canto na diagonal enquanto os outros três seguem suaves. Isso substitui o card retangular genérico em qualquer peça-chave.</p>
+          </article>
+          <article class="rule-tile cut-card">
+            <span class="tile-index">03</span>
+            <h3>preto e branco primeiro, cor depois</h3>
+            <p>Fotografia é sempre P&amp;B. A cor mora na UI (fundo, chip, sublinhado) e nunca é aplicada sobre o rosto ou a cena fotografada.</p>
+          </article>
+          <article class="rule-tile cut-card cut-card--tl">
+            <span class="tile-index">04</span>
+            <h3>títulos sempre em caixa baixa</h3>
+            <p>Hierarquia por porcentagem do título: 100% título, 40% subtítulo, 30% corpo, 20% detalhe. Regra de manual, não escolha estética opcional.</p>
+          </article>
+          <article class="rule-tile cut-card">
+            <span class="tile-index">05</span>
+            <h3>três cores por composição, no máximo</h3>
+            <p>Cada peça usa a dupla malva/roxo mais no máximo uma cor secundária (cinza ou laranja). Nunca as cinco cores da paleta ao mesmo tempo.</p>
+          </article>
+          <article class="rule-tile cut-card cut-card--tl">
+            <span class="tile-index">06</span>
+            <h3>movimento tem propósito narrativo</h3>
+            <p>Elevo significa avançar de nível. Motion revela hierarquia e confirma interação - nunca decoração solta, nunca gradiente roxo genérico de SaaS de IA.</p>
+          </article>
+        </div>
+
+        <div class="module-grid reveal" aria-label="Checklist de módulos do DESIGN.md">
+          <article><span>Palette</span><strong>Malva/Roxo com troca de papel dark/light, Cinza, Laranja restrito, Grafite</strong></article>
+          <article><span>Typography</span><strong>Hanken Grotesk único, caixa baixa, hierarquia 100/40/30/20%</strong></article>
+          <article><span>Spacing</span><strong>Grid modular = lado maior / 16, sistema de 8px para componentes</strong></article>
+          <article><span>Components</span><strong>Botões pill simples, cards com corte assimétrico, estados completos</strong></article>
+          <article><span>Elevation</span><strong>Corte diagonal como assinatura, sombra roxa translúcida, sem glass genérico</strong></article>
+          <article><span>Narrative</span><strong>Explorador + Criador: provocar e depois estruturar o caminho</strong></article>
+        </div>
+      </section>
+
+      <!-- ===================== 02 COLOR ===================== -->
+      <section id="color" class="section">
+        <header class="section-header reveal">
+          <div>
+            <span class="eyebrow">02 Color</span>
+            <h2>malva quente, roxo estrutural.</h2>
+          </div>
+          <p>Clique nos swatches para copiar o hex. O tema claro não é o escuro invertido - malva e roxo trocam de função para manter contraste real.</p>
+        </header>
+
+        <div class="color-layout reveal">
+          <div class="swatch-grid">
+            <button class="swatch" data-copy="#b882e8"><span style="background:#b882e8"></span><strong>Malva</strong><em>#b882e8</em></button>
+            <button class="swatch" data-copy="#2f1533"><span style="background:#2f1533"></span><strong>Roxo</strong><em>#2f1533</em></button>
+            <button class="swatch" data-copy="#edeae5"><span style="background:#edeae5"></span><strong>Cinza</strong><em>#edeae5</em></button>
+            <button class="swatch" data-copy="#ff4817"><span style="background:#ff4817"></span><strong>Laranja</strong><em>#ff4817</em></button>
+            <button class="swatch" data-copy="#0f0f0f"><span style="background:#0f0f0f"></span><strong>Grafite</strong><em>#0f0f0f</em></button>
+            <button class="swatch" data-copy="#8b8175"><span style="background:#8b8175"></span><strong>Neutro morno</strong><em>#8b8175</em></button>
+            <button class="swatch" data-copy="#5b9e73"><span style="background:#5b9e73"></span><strong>Sucesso</strong><em>#5b9e73</em></button>
+            <button class="swatch" data-copy="#d9a544"><span style="background:#d9a544"></span><strong>Alerta</strong><em>#d9a544</em></button>
+            <button class="swatch" data-copy="#d64545"><span style="background:#d64545"></span><strong>Erro</strong><em>#d64545</em></button>
+            <button class="swatch" data-copy="#3d1c44"><span style="background:#3d1c44"></span><strong>Roxo elevado</strong><em>#3d1c44</em></button>
+          </div>
+
+          <aside class="usage-panel">
+            <h3>Heurísticas de cor</h3>
+            <div class="spec-row"><span>Malva</span><strong>CTA e destaque em fundo escuro (roxo); símbolo/logo em versão escura sobre malva</strong></div>
+            <div class="spec-row"><span>Roxo</span><strong>CTA e texto em fundo claro (cinza); fundo cheio em seções de prova/contraste</strong></div>
+            <div class="spec-row"><span>Cinza</span><strong>Fundo padrão da maioria das seções claras. Nunca como texto de leitura.</strong></div>
+            <div class="spec-row"><span>Laranja</span><strong>Só um destaque por composição - chip, ícone ou sublinhado. Nunca fundo grande.</strong></div>
+            <div class="spec-row"><span>Grafite</span><strong>Texto de altíssimo contraste e rodapés. Substitui preto puro (#000).</strong></div>
+            <div class="spec-row"><span>Estados</span><strong>Sucesso/Alerta/Erro só em formulário e feedback - nunca decoração.</strong></div>
+            <div class="spec-row"><span>Neutro</span><strong>Maior parte da UI operacional: bordas, ícones secundários, placeholders.</strong></div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- ===================== 03 TYPE ===================== -->
+      <section id="type" class="section">
+        <header class="section-header reveal">
+          <div>
+            <span class="eyebrow">03 Typography</span>
+            <h2>uma família, hierarquia por percentual.</h2>
+          </div>
+          <p>Hanken Grotesk cobre display e UI. Mono é convenção interna deste workbench (dados/etiquetas) e nunca aparece no site final.</p>
+        </header>
+
+        <div class="type-layout reveal">
+          <div class="type-samples">
+            <article>
+              <span class="meta">Display · Hanken Grotesk 800</span>
+              <p class="sample-display">o crescimento exige mais que esforço</p>
+            </article>
+            <article>
+              <span class="meta">UI · Hanken Grotesk 500</span>
+              <p class="sample-ui">Projetos estratégicos que organizam, estruturam e potencializam processos de crescimento reais.</p>
+            </article>
+            <article>
+              <span class="meta">Mono · JetBrains Mono (uso interno do workbench)</span>
+              <p class="sample-mono">DESIGN.md / TOKENS.CSS / ELEVO-DS/SPECS/</p>
+            </article>
+          </div>
+
+          <aside class="usage-panel">
+            <h3>Escala tipográfica</h3>
+            <div class="spec-row"><span>Título</span><strong>100% · clamp(56px, 8vw, 120px)</strong></div>
+            <div class="spec-row"><span>Subtítulo</span><strong>40% · clamp(26px, 3.2vw, 44px)</strong></div>
+            <div class="spec-row"><span>Corpo</span><strong>30% · 17px / 1.6 de altura de linha</strong></div>
+            <div class="spec-row"><span>Detalhe</span><strong>20% · 13px, tracking .08em, caixa alta</strong></div>
+            <div class="spec-row"><span>Regra</span><strong>Títulos sempre em caixa baixa, sem exceção</strong></div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- ===================== 04 UI ===================== -->
+      <section id="components" class="section">
+        <header class="section-header reveal">
+          <div>
+            <span class="eyebrow">04 Components</span>
+            <h2>peças de interface com estado.</h2>
+          </div>
+          <p>Botões e inputs ficam com cantos macios (pill/rounded). O corte assimétrico é exclusivo de cards e módulos de mídia - nunca corte um botão.</p>
+        </header>
+
+        <div class="component-layout reveal">
+          <div class="component-stack">
+            <div class="control-row">
+              <button class="btn primary">Conversar <svg><use href="#i-message-circle"/></svg></button>
+              <button class="btn secondary">Agendar <svg><use href="#i-calendar"/></svg></button>
+              <button class="btn tertiary">Ver serviços</button>
+              <button class="btn primary" disabled>Enviando</button>
+            </div>
+
+            <form class="form-demo">
+              <label>
+                <span>Nome</span>
+                <input value="Jessica Fahl" />
+              </label>
+              <label>
+                <span>Telefone / WhatsApp</span>
+                <input value="(43) 99158-8212" />
+              </label>
+              <label class="has-error">
+                <span>E-mail</span>
+                <input value="jessica@" />
+                <small>Informe um e-mail completo para retornarmos o contato.</small>
+              </label>
+            </form>
+
+            <div class="state-grid">
+              <article class="state-card cut-card">
+                <span class="skeleton"></span>
+                <strong>Loading</strong>
+                <p>Skeleton no formato do conteúdo final. Sem spinner genérico.</p>
+              </article>
+              <article class="state-card cut-card cut-card--tl">
+                <svg><use href="#i-image"/></svg>
+                <strong>Empty</strong>
+                <p>Explica o que falta (ex: depoimento 4 "ainda não tenho") e dá um próximo passo.</p>
+              </article>
+              <article class="state-card error cut-card">
+                <svg><use href="#i-x"/></svg>
+                <strong>Error</strong>
+                <p>Diz o que falhou no envio do formulário de agendamento e como corrigir.</p>
+              </article>
+            </div>
+          </div>
+
+          <aside class="brandos-preview cut-card cut-card--lg">
+            <div class="preview-head">
+              <div>
+                <span class="eyebrow">BrandOS Preview</span>
+                <h3>elevo control plane</h3>
+              </div>
+              <span class="badge">v1</span>
+            </div>
+            <div class="metric-row">
+              <div><span>Cobertura do sistema</span><strong>78%</strong></div>
+              <div><span>Seções mapeadas</span><strong>12</strong></div>
+              <div><span>Lacunas abertas</span><strong>4</strong></div>
+            </div>
+            <div class="bar-chart" aria-label="Progresso dos módulos">
+              <i style="height:48%"></i><i style="height:62%"></i><i style="height:78%"></i><i style="height:58%"></i>
+              <i style="height:84%"></i><i style="height:70%"></i><i style="height:94%"></i><i style="height:66%"></i>
+            </div>
+            <div class="asset-list">
+              <div><svg><use href="#i-file-text"/></svg><strong>DESIGN.md</strong><span>Fonte de UI</span></div>
+              <div><svg><use href="#i-file-text"/></svg><strong>Manual de Identidade</strong><span>Fonte de marca</span></div>
+              <div><svg><use href="#i-image"/></svg><strong>assets/</strong><span>Logos, depoimentos, mídia</span></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- ===================== 05 MOTION ===================== -->
+      <section id="motion" class="section">
+        <header class="section-header reveal">
+          <div>
+            <span class="eyebrow">05 Motion</span>
+            <h2>movimento repetível, não decoração.</h2>
+          </div>
+          <p>Use o replay para inspecionar a linguagem de motion. Cada efeito precisa ser repetível, legível e removível sem quebrar nada.</p>
+        </header>
+
+        <div class="motion-toolbar reveal">
+          <button class="btn primary" id="replayMotion"><svg><use href="#i-play"/></svg> Repetir motion</button>
+          <span class="meta">Reduced-motion desliga o autoplay.</span>
+        </div>
+
+        <div class="motion-lab reveal" id="motionLab">
+          <article class="motion-demo cut-card">
+            <span class="meta">Micro-interação</span>
+            <button class="magnetic-button">Ação no hover <svg><use href="#i-arrow-right"/></svg></button>
+            <p>Elevação, anel de foco, pressão ativa. Sem motion em elementos não interativos.</p>
+          </article>
+          <article class="motion-demo cut-card cut-card--tl">
+            <span class="meta">Scroll reveal</span>
+            <div class="mini-stack"><i></i><i></i><i></i></div>
+            <p>Opacidade + translateY(16px), stagger de 80-120ms entre irmãos.</p>
+          </article>
+          <article class="motion-demo cut-card">
+            <span class="meta">Só no hero</span>
+            <div class="word-demo"><span>elevar</span><span>é</span><span>estruturar</span></div>
+            <p>Permitido uma vez no H1. Banido em conteúdo comum.</p>
+          </article>
+          <article class="motion-demo cut-card cut-card--tl">
+            <span class="meta">WebGL opcional</span>
+            <canvas id="miniShader" aria-hidden="true"></canvas>
+            <p>Shader só no hero, com fallback. Desligado por padrão neste projeto.</p>
+          </article>
+        </div>
+
+        <div class="anti-list reveal">
+          <span>Nunca transition-all</span>
+          <span>Nunca animar width ou height</span>
+          <span>Nunca parallax pesado</span>
+          <span>Nunca loop infinito sem pausa</span>
+          <span>Nunca WebGL fora do hero</span>
+        </div>
+      </section>
+
+      <!-- ===================== 06 ICONS ===================== -->
+      <section id="icons" class="section">
+        <header class="section-header reveal">
+          <div>
+            <span class="eyebrow">06 Icons</span>
+            <h2>lucide, 1.75px, sem exceções.</h2>
+          </div>
+          <p>Lucide é a única biblioteca usada. O manual de marca não define ícones - a necessidade real do site é baixa (WhatsApp, agenda, seta, localização).</p>
+        </header>
+
+        <article class="icon-library cut-card reveal">
+          <div class="library-head">
+            <span class="eyebrow">Lucide Library</span>
+            <h3>uma linguagem de ícone. traço 1.75px.</h3>
+          </div>
+          <div class="lucide-grid">
+            <span><svg><use href="#i-arrow-right"/></svg>ArrowRight</span>
+            <span><svg><use href="#i-message-circle"/></svg>MessageCircle (WhatsApp)</span>
+            <span><svg><use href="#i-calendar"/></svg>Calendar (Google Agenda)</span>
+            <span><svg><use href="#i-map-pin"/></svg>MapPin (Londrina/PR)</span>
+            <span><svg><use href="#i-menu"/></svg>Menu</span>
+            <span><svg><use href="#i-x"/></svg>X</span>
+            <span><svg><use href="#i-search"/></svg>Search</span>
+            <span><svg><use href="#i-check"/></svg>Check</span>
+            <span><svg><use href="#i-copy"/></svg>Copy</span>
+            <span><svg><use href="#i-external-link"/></svg>ExternalLink</span>
+            <span><svg><use href="#i-layout-grid"/></svg>LayoutGrid</span>
+            <span><svg><use href="#i-image"/></svg>Image</span>
+            <span><svg><use href="#i-sparkles"/></svg>Sparkles</span>
+            <span><svg><use href="#i-play"/></svg>Play</span>
+          </div>
+        </article>
+      </section>
+
+      <!-- ===================== 07 ASSETS ===================== -->
+      <section id="assets" class="section">
+        <header class="section-header reveal">
+          <div>
+            <span class="eyebrow">07 Assets</span>
+            <h2>fotografia p&amp;b, corte no lugar de mascote.</h2>
+          </div>
+          <p>Fotos reais de clientes/executivos já estão em assets/. O que falta (heróis, ambiente) segue esta direção até chegar material definitivo.</p>
+        </header>
+
+        <div class="asset-layout reveal">
+          <div class="media-grid">
+            <article class="media-slot photo cut-card">
+              <span>Fotografia</span>
+              <h3>retrato editorial em p&amp;b</h3>
+              <p>Fundadores e executivos reais, luz natural, postura confiante e não posada. Nunca stock corporativo sorrindo para laptop.</p>
+            </article>
+            <article class="media-slot illustration cut-card cut-card--tl">
+              <span>Ilustração</span>
+              <h3>esquemática, não mascote</h3>
+              <p>Uso raro - diagramas de processo (ex: "como um projeto acontece") em traço único roxo sobre cinza. Sem isometria, sem personagens.</p>
+            </article>
+            <article class="media-slot ai cut-card">
+              <span>Imagem gerada por IA</span>
+              <h3>textura e gradiente, não pessoas</h3>
+              <p>Gerada só para fundos abstratos (hero, CTA final). Nunca substitui fotografia real de pessoas ou cria UI falsa.</p>
+            </article>
+            <article class="media-slot pattern cut-card cut-card--tl">
+              <span>Padrão / textura</span>
+              <h3>degradê liso + degradê granulado</h3>
+              <p>Os dois estilos de degradê do manual (malva/laranja/rosa). Substrato de seção, nunca papel de parede competindo com o texto.</p>
+            </article>
+          </div>
+
+          <article class="icon-library cut-card">
+            <div class="library-head">
+              <span class="eyebrow">Moodboard Unsplash</span>
+              <h3>categorias de imagem placeholder</h3>
+              <p>Categorias para o Passo D do web-build. Fotos reais de clientes/depoimentos já vieram do cliente (assets/clientes, assets/depoimentos) - isto cobre o que falta.</p>
+            </div>
+            <div class="lucide-grid" style="grid-template-columns:1fr;">
+              <span style="height:auto;padding:14px;flex-direction:column;align-items:flex-start;gap:6px;">
+                <strong style="text-transform:none;font-family:var(--font-ui);font-size:14px;color:var(--text-primary);">Hero / retrato do fundador</strong>
+                Uso: hero de index.html. Termos: "brazilian founder portrait black and white, confident business owner, natural light editorial". Nota: real, digno, sem sorriso de stock. Rejeitar: fundo branco de estúdio, mãos apertando.
+              </span>
+              <span style="height:auto;padding:14px;flex-direction:column;align-items:flex-start;gap:6px;">
+                <strong style="text-transform:none;font-family:var(--font-ui);font-size:14px;color:var(--text-primary);">Workshop / estratégia em ação</strong>
+                Uso: Seção 3 "Como atuamos" e Seção 6 "Como um projeto acontece". Termos: "business strategy workshop, sticky notes whiteboard, team working session candid". Nota: mãos e post-its reais, sem atores.
+              </span>
+              <span style="height:auto;padding:14px;flex-direction:column;align-items:flex-start;gap:6px;">
+                <strong style="text-transform:none;font-family:var(--font-ui);font-size:14px;color:var(--text-primary);">Retratos de depoimento</strong>
+                Uso: Seção 4 "Empresas que elevaram o nível". Já parcialmente coberto por assets/depoimentos (texto sem foto ainda). Termos: "brazilian executive headshot black and white, confident close up". Rejeitar: modelo genérico de banco de imagens.
+              </span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ===================== 08 QA ===================== -->
+      <section id="quality" class="section">
+        <header class="section-header reveal">
+          <div>
+            <span class="eyebrow">08 Quality</span>
+            <h2>portões profissionais antes da aprovação.</h2>
+          </div>
+          <p>Checklist que protege o DESIGN.md final de drift de vibe-coding durante a implementação seção a seção.</p>
+        </header>
+
+        <div class="quality-grid reveal">
+          <article><span>Acessibilidade</span><strong>Contraste AA, foco visível, navegação por teclado, reduced motion</strong><em>Texto 4.5:1 · UI 3:1 · toque 44px</em></article>
+          <article><span>Responsivo</span><strong>Mobile-first (375px), depois 2 colunas, depois desktop</strong><em>375 · 768 · 1024 · 1280</em></article>
+          <article><span>Microcopy</span><strong>Ações específicas, erros úteis, sem promessa genérica</strong><em>Proibidas: inovador, disruptivo, soluções, bem-vindo, "estou pronto", "perfeito"</em></article>
+          <article><span>Estados</span><strong>Loading, empty, error, success, disabled</strong><em>Skeleton no lugar de spinner</em></article>
+          <article><span>Performance</span><strong>Landing de conversão, uma página, leve</strong><em>1.2MB página · 180KB hero · 90KB JS</em></article>
+          <article><span>SEO</span><strong>Schema local, OG completo, sitemap</strong><em>Schema LocalBusiness · OG 1200x630 · 150-160 chars</em></article>
+        </div>
+      </section>
+
+      <!-- ===================== 09 AI GEN ===================== -->
+      <section id="ai-gen" class="section">
+        <header class="section-header reveal">
+          <div>
+            <span class="eyebrow">09 AI Gen</span>
+            <h2>prompts por imagem-chave, sem parâmetros.</h2>
+          </div>
+          <p>Cada prompt é o briefing descritivo. Parâmetros de ferramenta (aspect ratio, versão, estilo) entram na hora de rodar, não aqui.</p>
+        </header>
+
+        <div class="prompt-bank reveal">
+          <article class="prompt-card global-direction cut-card">
+            <header class="prompt-head">
+              <span class="meta">Direção global</span>
+              <h3>regras que toda imagem do projeto herda</h3>
+            </header>
+            <p>Fotografia é sempre preto e branco, luz natural, pessoas reais e não modelos de stock. Fundos/texturas gerados por IA usam só malva, roxo e um toque de laranja - nunca as cinco cores da paleta juntas. Nenhuma imagem mostra texto de UI falso ou logotipos de terceiros.</p>
+          </article>
+
+          <article class="prompt-card cut-card">
+            <header class="prompt-head">
+              <span class="meta">Imagem-chave · Hero (index.html)</span>
+              <h3>fundador em movimento, retrato editorial</h3>
+            </header>
+            <p class="meta">Onde é usado</p>
+            <p>Lado direito do hero em split 50/50, atrás de leve overlay escuro para legibilidade do título à esquerda.</p>
+            <p class="meta">Prompt</p>
+            <pre class="prompt-text">Um empresário brasileiro de 40 a 55 anos, fundador ou CEO, em ambiente de escritório real e discreto, olhando levemente para fora do quadro com expressão confiante e serena, sem sorriso posado. Luz natural lateral entrando por uma janela, sombras suaves. Fotografado em preto e branco, grão sutil de filme, profundidade de campo rasa, lente 85mm. Composição assimétrica, espaço negativo à esquerda do quadro para o título. Sem terno de banco de imagens, sem fundo branco de estúdio, sem aperto de mão, sem sorriso de stock corporativo. Clima de determinação calma e progresso real.</pre>
+            <p class="meta">Ferramentas sugeridas</p>
+            <p>Melhor em Midjourney v7 ou Flux Pro 1.1 para realismo de rosto. Evitar geradores que "amaciam" demais a expressão.</p>
+          </article>
+
+          <article class="prompt-card cut-card cut-card--tl">
+            <header class="prompt-head">
+              <span class="meta">Imagem-chave · Fundo abstrato (hero e Seção 9 agendamento)</span>
+              <h3>degradê malva-laranja-rosa, textura granulada</h3>
+            </header>
+            <p class="meta">Onde é usado</p>
+            <p>Substrato de fundo no hero e na seção final de agendamento (momento de pico, "Peak-End"). Nunca atrás de blocos de texto longo.</p>
+            <p class="meta">Prompt</p>
+            <pre class="prompt-text">Um fundo abstrato fluido em gradiente, transições suaves entre roxo escuro profundo, malva claro e um toque de vermelho-laranja vibrante, lembrando tinta se movendo em câmera lenta ou fumaça colorida. Grão de filme sutil sobreposto para textura orgânica, sem elementos figurativos, sem texto, sem logotipo. Composição assimétrica com um núcleo de luz deslocado do centro. Sem brilho roxo genérico de landing page de IA - a paleta é especificamente malva #b882e8, roxo #2f1533 e laranja #ff4817, nunca azul ou ciano.</pre>
+            <p class="meta">Ferramentas sugeridas</p>
+            <p>Recraft ou Midjourney para controle de gradiente fluido. gpt-image para grão de filme mais controlável.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ===================== 10 OS ===================== -->
+      <section id="os" class="section final-section">
+        <header class="section-header reveal">
+          <div>
+            <span class="eyebrow">10 OS</span>
+            <h2>o design system, codificado.</h2>
+          </div>
+          <p>Quando este showcase for aprovado, o DESIGN.md oficial é exportado dele. Esta seção É o núcleo narrativo do DESIGN.md.</p>
+        </header>
+
+        <div class="brandos-narrative reveal">
+          <h3>Narrativa da marca aplicada a decisões visuais</h3>
+          <div class="narrative-grid">
+            <article><span class="meta">Explorador</span><p>Provocação primeiro: chips de dor clicáveis na Seção 1 desafiam o status quo antes de qualquer solução aparecer.</p></article>
+            <article><span class="meta">Criador</span><p>Estrutura logo depois: a Seção 2 organiza a provocação em três frentes claras (negócio, mercado, pessoas).</p></article>
+            <article><span class="meta">Movimento</span><p>Motion de scroll e o corte diagonal comunicam avanço - nunca estático, nunca decorativo sem direção.</p></article>
+            <article><span class="meta">Estrutura</span><p>Grid modular (lado maior ÷ 16) rege espaçamento; nada de valor solto ou acidental.</p></article>
+            <article><span class="meta">Protagonismo</span><p>CTAs em segunda pessoa ("você"), nunca a marca falando de si mesma como herói.</p></article>
+            <article><span class="meta">Proximidade regional</span><p>Londrina/PR aparece de forma concreta (WhatsApp local, mapa, depoimentos reais) - não terceiriza a confiança para selos genéricos.</p></article>
+          </div>
+        </div>
+
+        <div class="heuristics-block reveal">
+          <h3>Heurísticas de uso</h3>
+          <div class="heuristic-list">
+            <article><h4>Quando usar malva vs roxo como cor de ação?</h4><p>Malva em fundo escuro (roxo), roxo em fundo claro (cinza). A troca de papel é a regra - nunca os dois como CTAs concorrentes na mesma seção.</p></article>
+            <article><h4>Quando usar o corte assimétrico vs canto redondo simples?</h4><p>Corte assimétrico em cards, módulos de mídia e blocos de prova social. Canto redondo simples em botões, inputs, pills e badges. O corte nunca aparece em elementos clicáveis pequenos.</p></article>
+            <article><h4>Quando usar faixa escura (roxo) vs faixa clara (cinza)?</h4><p>Faixa escura para momentos de peso (hero, prova/resultados, CTA final de agendamento - os momentos de pico da jornada Peak-End). Faixa clara para conteúdo informativo corrido.</p></article>
+            <article><h4>Quando usar laranja?</h4><p>Um único destaque por composição - sublinhado, chip ativo ou ícone de alerta. Nunca como cor de fundo de seção inteira.</p></article>
+            <article><h4>Quando a foto é colorida vs P&amp;B?</h4><p>Nunca colorida. Toda fotografia de pessoa é preto e branco; a cor sempre vem do layout ao redor da foto, nunca da foto em si.</p></article>
+            <article><h4>Quantos CTAs primários por seção?</h4><p>Um. Lei de Hick, já definida no CLAUDE.md do projeto. CTA secundário (ver serviços, voltar) fica em botão tertiary sem competir visualmente.</p></article>
+          </div>
+        </div>
+
+        <div class="anti-generic-block reveal">
+          <h3>Guardrails anti-genérico</h3>
+          <ul class="guardrail-list">
+            <li><strong>Cores:</strong> nunca usar a paleta padrão do Tailwind como cor de marca. Só tokens deste sistema.</li>
+            <li><strong>Cores:</strong> nunca as cinco cores da paleta na mesma composição - máximo três.</li>
+            <li><strong>Tipografia:</strong> nunca misturar outra família tipográfica com Hanken Grotesk. Nunca título em caixa alta ou title case.</li>
+            <li><strong>Forma:</strong> nunca substituir o corte assimétrico por card retangular genérico em peças-chave (hero, prova, depoimento).</li>
+            <li><strong>Forma:</strong> nunca cortar um botão, input ou pill - o corte é exclusivo de card/mídia.</li>
+            <li><strong>Sombra:</strong> nunca `shadow-md`/`shadow-lg` cru do Tailwind. Sombra sempre tingida de roxo, conforme tokens.css.</li>
+            <li><strong>Fundo:</strong> nunca brilho/glow roxo genérico de landing page de IA. O degradê é o do manual (malva/roxo/laranja com grão), não um radial-gradient azulado.</li>
+            <li><strong>Fotografia:</strong> nunca foto de banco de imagens colorida, sorriso de stock ou aperto de mão corporativo.</li>
+            <li><strong>Ícones:</strong> nunca ícone dentro de círculo colorido (clichê de SaaS genérico). Ícone solo com stroke 1.75px.</li>
+            <li><strong>Motion:</strong> nunca `transition-all`. Só `transform` e `opacity`. Sempre respeitar `prefers-reduced-motion`.</li>
+            <li><strong>Layout:</strong> nunca centralizar tudo. Hero e seções de prova seguem composição assimétrica (2 colunas desiguais), não bloco central.</li>
+            <li><strong>Copy:</strong> nunca as palavras proibidas do CLAUDE.md (inovador, disruptivo, soluções, bem-vindo, "estou pronto", "perfeito" como filler) e nunca travessão (-).</li>
+            <li><strong>Estados:</strong> todo elemento clicável precisa de hover, focus-visible e active - sem exceção, mesmo em protótipo.</li>
+          </ul>
+        </div>
+
+        <div class="brandos-map reveal">
+          <article><span>BRAND.md</span><strong>Ainda não formalizado - hoje vive no Manual de Identidade Visual (PDF) e no PLANEJAMENTO.docx em my_brand_assets/.</strong></article>
+          <article><span>DESIGN.md</span><strong>Tokens, UI, motion, responsivo e regras de implementação - exportado deste showcase.</strong></article>
+          <article><span>Asset index</span><strong>assets/clientes, assets/midia, assets/depoimentos e my_brand_assets/ com logos, formas e manual.</strong></article>
+          <article><span>BrandOS</span><strong>Esta camada de showcase - navegável hoje como workbench, painel de operação quando o site estiver no ar.</strong></article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="./showcase.js"></script>
+</body>
+</html>

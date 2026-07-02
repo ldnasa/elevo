@@ -1,0 +1,89 @@
+{
+  "$description": "ELEVO Design System - DTCG-style token export. Vendor-neutral. Mirrors tokens.css exactly.",
+  "primitive": {
+    "color": {
+      "malva": { "$type": "color", "$value": "#b882e8", "$description": "Brand primary. Manual de Identidade Visual, p.27." },
+      "roxo": { "$type": "color", "$value": "#2f1533", "$description": "Brand primary (dark anchor)." },
+      "cinza": { "$type": "color", "$value": "#edeae5", "$description": "Brand secondary, light neutral." },
+      "laranja": { "$type": "color", "$value": "#ff4817", "$description": "Brand secondary accent. Restrict to one highlight per composition." },
+      "grafite": { "$type": "color", "$value": "#0f0f0f", "$description": "Brand secondary, near-black. Replaces pure #000." },
+      "neutral-50": { "$type": "color", "$value": "#f7f5f2" },
+      "neutral-100": { "$type": "color", "$value": "#edeae5" },
+      "neutral-200": { "$type": "color", "$value": "#ddd8d0" },
+      "neutral-300": { "$type": "color", "$value": "#c3bcb0" },
+      "neutral-400": { "$type": "color", "$value": "#a89f91" },
+      "neutral-500": { "$type": "color", "$value": "#8b8175" },
+      "neutral-600": { "$type": "color", "$value": "#6f665c" },
+      "neutral-700": { "$type": "color", "$value": "#4a4340" },
+      "neutral-800": { "$type": "color", "$value": "#2b2724" },
+      "neutral-900": { "$type": "color", "$value": "#0f0f0f" },
+      "success": { "$type": "color", "$value": "#5b9e73", "$description": "Auxiliary, not in brand manual. Form/feedback states only." },
+      "warning": { "$type": "color", "$value": "#d9a544", "$description": "Auxiliary, not in brand manual. Form/feedback states only." },
+      "error": { "$type": "color", "$value": "#d64545", "$description": "Auxiliary, not in brand manual. Distinct from laranja to avoid CTA/danger confusion." }
+    }
+  },
+  "semantic": {
+    "color": {
+      "primary": {
+        "$type": "color",
+        "$value": "{primitive.color.malva}",
+        "$description": "Dark-theme value. Light theme overrides to {primitive.color.roxo} - see themes.light below. Role-swap is intentional brand behavior, not a bug."
+      },
+      "secondary": { "$type": "color", "$value": "{primitive.color.laranja}" },
+      "text": { "$type": "color", "$value": "{primitive.color.cinza}", "$description": "Dark theme. Light theme overrides to {primitive.color.roxo}." },
+      "text-on-primary": { "$type": "color", "$value": "{primitive.color.roxo}", "$description": "Dark theme. Light theme overrides to {primitive.color.cinza}." },
+      "surface-primary": { "$type": "color", "$value": "#2f1533", "$description": "Dark theme. Light theme overrides to {primitive.color.cinza}." },
+      "surface-elevated": { "$type": "color", "$value": "#3d1c44", "$description": "Dark theme. Light theme overrides to #ffffff." },
+      "success": { "$type": "color", "$value": "{primitive.color.success}" },
+      "warning": { "$type": "color", "$value": "{primitive.color.warning}" },
+      "error": { "$type": "color", "$value": "{primitive.color.error}" }
+    },
+    "typography": {
+      "font-display": { "$type": "fontFamily", "$value": ["Hanken Grotesk", "sans-serif"] },
+      "font-ui": { "$type": "fontFamily", "$value": ["Hanken Grotesk", "sans-serif"] },
+      "font-mono": { "$type": "fontFamily", "$value": ["JetBrains Mono", "monospace"], "$description": "Workbench/meta labels only. Never on the live site - brand uses Hanken Grotesk exclusively." },
+      "size-hero": { "$type": "dimension", "$value": "120px", "$description": "Max clamp value. Title tier = 100% of scale. Titles are always lowercase (brand rule)." },
+      "size-h2": { "$type": "dimension", "$value": "58px", "$description": "Subtitle tier = ~40% of hero." },
+      "size-h3": { "$type": "dimension", "$value": "22px" },
+      "size-body": { "$type": "dimension", "$value": "17px", "$description": "Body tier = ~30% of hero." },
+      "size-small": { "$type": "dimension", "$value": "14px", "$description": "Detail tier = ~20% of hero." },
+      "size-meta": { "$type": "dimension", "$value": "11px" }
+    },
+    "spacing": {
+      "space-1": { "$type": "dimension", "$value": "4px" },
+      "space-2": { "$type": "dimension", "$value": "8px" },
+      "space-3": { "$type": "dimension", "$value": "12px" },
+      "space-4": { "$type": "dimension", "$value": "16px" },
+      "space-5": { "$type": "dimension", "$value": "24px" },
+      "space-6": { "$type": "dimension", "$value": "32px" },
+      "space-7": { "$type": "dimension", "$value": "48px" }
+    },
+    "shape": {
+      "radius-sm": { "$type": "dimension", "$value": "6px" },
+      "radius-md": { "$type": "dimension", "$value": "10px" },
+      "radius-lg": { "$type": "dimension", "$value": "20px" },
+      "radius-xl": { "$type": "dimension", "$value": "28px" },
+      "radius-pill": { "$type": "dimension", "$value": "999px" },
+      "cut": { "$type": "dimension", "$value": "26px", "$description": "Signature asymmetric corner cut (my_brand_assets/formas-exemplo-elevo). Cards/media only, never buttons/inputs." },
+      "cut-lg": { "$type": "dimension", "$value": "56px" }
+    },
+    "motion": {
+      "duration-fast": { "$type": "duration", "$value": "150ms" },
+      "duration-base": { "$type": "duration", "$value": "200ms" },
+      "duration-medium": { "$type": "duration", "$value": "400ms" },
+      "duration-slow": { "$type": "duration", "$value": "600ms" },
+      "ease-out": { "$type": "cubicBezier", "$value": [0.2, 0.8, 0.2, 1] }
+    }
+  },
+  "themes": {
+    "dark": { "$description": "Default. Roxo-anchored background, malva as primary/accent." },
+    "light": {
+      "$description": "Toggle target. Cinza-anchored background, roxo as primary/accent (role-swap).",
+      "semantic.color.primary": { "$type": "color", "$value": "{primitive.color.roxo}" },
+      "semantic.color.text": { "$type": "color", "$value": "{primitive.color.roxo}" },
+      "semantic.color.text-on-primary": { "$type": "color", "$value": "{primitive.color.cinza}" },
+      "semantic.color.surface-primary": { "$type": "color", "$value": "{primitive.color.cinza}" },
+      "semantic.color.surface-elevated": { "$type": "color", "$value": "#ffffff" }
+    }
+  }
+}

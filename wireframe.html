@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ELEVO - Wireframe Estrutural</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root{
+    --bg:#f7f7f7; --block:#fff; --ph:#e9e9e9; --line:#ddd;
+    --ink:#333; --ink2:#666; --ink3:#999; --soft:rgba(0,0,0,.05);
+    --anno:#fbe7a2; --anno-line:#e0b000; --anno-ink:#5a4500;
+  }
+  *{font-family:Inter,Arial,Helvetica,sans-serif;}
+  body{background:var(--bg);color:var(--ink);}
+  .block{background:var(--block);border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 2px var(--soft);}
+  .ph{background:var(--ph);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--ink3);font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;}
+  .btn{border-radius:8px;font-weight:600;font-size:.85rem;padding:.6rem 1.1rem;cursor:pointer;transition:.15s;border:1px solid var(--ink);}
+  .btn-fill{background:var(--ink);color:#fff;}
+  .btn-fill:hover{background:#000;}
+  .btn-out{background:transparent;color:var(--ink);}
+  .btn-out:hover{background:#ececec;}
+  .chip{border:1px solid var(--line);background:#fafafa;border-radius:999px;padding:.45rem .9rem;font-size:.82rem;cursor:pointer;transition:.15s;}
+  .chip:hover{background:#ececec;border-color:var(--ink3);}
+  .navlink{font-size:.85rem;color:var(--ink2);cursor:pointer;padding:.25rem 0;border-bottom:2px solid transparent;transition:.15s;}
+  .navlink:hover{color:var(--ink);}
+  .navlink.active{color:var(--ink);border-bottom-color:var(--ink);}
+  .eyebrow{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);font-weight:600;}
+  section{scroll-margin-top:84px;}
+  /* annotations */
+  .anno{background:var(--anno);border:1px dashed var(--anno-line);color:var(--anno-ink);border-radius:8px;font-size:.8rem;line-height:1.45;padding:.7rem .9rem;margin:.6rem 0;}
+  .anno b{color:var(--anno-ink);}
+  .anno::before{content:"⚑ A CONFIRMAR";display:block;font-weight:700;font-size:.68rem;letter-spacing:.08em;margin-bottom:.25rem;}
+  body.hide-anno .anno{display:none;}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:#222;color:#fff;padding:.7rem 1.1rem;border-radius:8px;font-size:.85rem;opacity:0;pointer-events:none;transition:.25s;z-index:60;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+  /* modal */
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:70;display:none;align-items:flex-start;justify-content:center;padding:24px;overflow-y:auto;}
+  .overlay.open{display:flex;}
+  .modal{background:var(--block);border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,.18);max-width:640px;width:100%;margin:auto;padding:0;}
+  .modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:1.5rem 1.5rem 0;}
+  .modal-x{border:1px solid var(--line);background:#fafafa;border-radius:8px;width:34px;height:34px;cursor:pointer;font-size:1rem;color:var(--ink2);line-height:1;flex-shrink:0;}
+  .modal-x:hover{background:#ececec;}
+  .modal-body{padding:1rem 1.5rem 1.5rem;}
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ===================== TOP MENU (fixo) ===================== -->
+<header class="fixed top-0 inset-x-0 z-50 bg-[var(--block)] border-b border-[var(--line)]">
+  <div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between gap-4">
+    <span onclick="go('head')" class="text-lg font-bold tracking-tight cursor-pointer select-none">elevo<span class="text-[var(--ink3)] font-normal text-xs ml-1 hidden sm:inline">estúdio de inovação estratégica</span></span>
+    <nav class="hidden lg:flex items-center gap-6">
+      <span class="navlink" data-nav="head" onclick="go('head')">Início</span>
+      <span class="navlink" data-nav="sobre" onclick="go('sobre')">Elevo</span>
+      <span class="navlink" data-nav="executivos" onclick="go('executivos')">Executivos</span>
+      <span class="navlink" data-nav="solucao" onclick="go('solucao')">Solução</span>
+      <span class="navlink" data-nav="midia" onclick="go('midia')">Na mídia</span>
+      <span class="navlink" data-nav="conteudos" onclick="go('conteudos')">Blog</span>
+    </nav>
+    <div class="flex items-center gap-2">
+      <button class="btn btn-fill hidden sm:block" onclick="wa()">Orçamento</button>
+      <button id="annoToggle" class="btn btn-out text-xs" onclick="toggleAnno()">Ocultar anotações</button>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-5 pb-24 pt-20">
+
+<!-- ===================== HEAD ===================== -->
+<section id="head" class="pt-8 pb-16">
+  <div class="grid md:grid-cols-2 gap-8 items-center">
+    <div>
+      <p class="eyebrow mb-4">Head</p>
+      <h1 class="text-3xl md:text-4xl font-bold leading-tight mb-4">O crescimento da sua empresa exige mais do que esforço</h1>
+      <p class="text-lg text-[var(--ink2)] mb-4">Projetos estratégicos para empresas que querem avançar para o próximo nível</p>
+      <p class="text-[var(--ink2)] mb-6 max-w-md">A ELEVO desenvolve projetos estratégicos para estruturar o crescimento da sua empresa, explorar novas oportunidades e escalar o seu modelo de negócio.</p>
+      <div class="flex flex-wrap gap-3">
+        <button class="btn btn-fill" onclick="wa()">Conversar &rarr; WhatsApp</button>
+        <button class="btn btn-out" onclick="go('solucao')">Conhecer projeto &darr;</button>
+      </div>
+    </div>
+    <div class="ph h-64 md:h-80">Visual-chave (foto P&B / forma da marca)</div>
+  </div>
+</section>
+
+<!-- ===================== S1 - TRAVANDO ===================== -->
+<section id="travando" class="py-14 border-t border-[var(--line)]">
+  <p class="eyebrow mb-3">Seção 1</p>
+  <h2 class="text-2xl md:text-3xl font-bold mb-4 max-w-2xl">O que está travando o seu próximo nível?</h2>
+  <p class="text-[var(--ink2)] mb-6 max-w-2xl">A sua empresa tem potencial, mas está com o crescimento travado? Tem iniciativas que não geram retorno e baixa performance operacional provam que evoluir sem direção custa caro?</p>
+  <div class="flex flex-wrap gap-3">
+    <span class="chip" onclick="go('solucao')">Equipe que não performa</span>
+    <span class="chip" onclick="go('solucao')">Esforço sem resultado</span>
+    <span class="chip" onclick="go('solucao')">Reação tardia ao mercado</span>
+    <span class="chip" onclick="go('solucao')">Rotinas desorganizadas</span>
+    <span class="chip" onclick="go('solucao')">Modelo de negócio ultrapassado</span>
+    <span class="chip" onclick="go('solucao')">Liderança sem gestão</span>
+    <span class="chip" onclick="go('solucao')">Perda de competitividade</span>
+  </div>
+  <div class="anno">Cada dor é clicável e ancora na frente de solução correspondente (pessoas / negócio / mercado). No documento, alguns chips apontam para a mesma frente. Confirmar o mapeamento de cada dor &rarr; frente.</div>
+</section>
+
+<!-- ===================== S2 - SOLUÇÃO ===================== -->
+<section id="solucao" class="py-14 border-t border-[var(--line)]">
+  <p class="eyebrow mb-3">Seção 2</p>
+  <h2 class="text-2xl md:text-3xl font-bold mb-4">Solução</h2>
+  <p class="text-[var(--ink2)] mb-6 max-w-2xl">Nós ajudamos você a organizar, direcionar e executar melhor esse crescimento com projetos estratégicos e práticos, transformando a inovação em evolução e resultados.</p>
+  <p class="font-semibold mb-2">Toda evolução empresarial acontece em três frentes:</p>
+  <ul class="text-[var(--ink2)] mb-8 space-y-1 max-w-xl">
+    <li>O negócio que precisa crescer.</li>
+    <li>O mercado que está mudando.</li>
+    <li>E as pessoas que tornam essa transformação possível.</li>
+  </ul>
+  <div class="grid md:grid-cols-3 gap-5">
+    <div class="block p-6">
+      <p class="eyebrow mb-2">Negócio</p>
+      <h3 class="font-bold mb-2">Transformar potencial em resultado</h3>
+      <p class="text-sm text-[var(--ink2)] mb-3">Quando o modelo atual deixa de sustentar o próximo nível, é hora de repensar como sua empresa gera valor, cresce e se diferencia.</p>
+      <p class="text-sm font-medium mb-4">Sua empresa implanta novas formas de crescer, vender e competir.</p>
+      <button class="btn btn-out" onclick="openFrente()">Descobrir +</button>
+    </div>
+    <div class="block p-6">
+      <p class="eyebrow mb-2">Mercado</p>
+      <h3 class="font-bold mb-2">Encontrar oportunidades antes dos concorrentes</h3>
+      <p class="text-sm text-[var(--ink2)] mb-3">Exploramos tendências, comportamentos e movimentos competitivos para identificar onde estão as próximas oportunidades de expansão.</p>
+      <p class="text-sm font-medium mb-4">O resultado é transformar oportunidades em vendas e crescimento.</p>
+      <button class="btn btn-out" onclick="toast('Abre detalhe da frente Mercado')">Descobrir +</button>
+    </div>
+    <div class="block p-6">
+      <p class="eyebrow mb-2">Pessoas</p>
+      <h3 class="font-bold mb-2">Desenvolver pessoas para alta performance</h3>
+      <p class="text-sm text-[var(--ink2)] mb-3">Desenvolvemos lideranças, estruturas e rotinas para executar melhor e ter resultado consistente.</p>
+      <p class="text-sm font-medium mb-4">Sua empresa passa a gerar mais resultados com o mesmo time.</p>
+      <button class="btn btn-out" onclick="toast('Abre detalhe da frente Pessoas')">Descobrir +</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== S3 - COMO ATUAMOS ===================== -->
+<section id="atuamos" class="py-14 border-t border-[var(--line)]">
+  <p class="eyebrow mb-3">Seção 3</p>
+  <h2 class="text-2xl md:text-3xl font-bold mb-6">Como atuamos</h2>
+  <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+    <div class="block p-5 text-center font-semibold">Projetos Estratégicos</div>
+    <div class="block p-5 text-center font-semibold">Módulos Estratégicos</div>
+    <div class="block p-5 text-center font-semibold">Workshops</div>
+    <div class="block p-5 text-center font-semibold">Mentoria</div>
+  </div>
+  <button class="btn btn-fill" onclick="wa()">Fale com a gente &rarr; WhatsApp</button>
+</section>
+
+<!-- ===================== S4 - EMPRESAS / LOGOS ===================== -->
+<section id="empresas" class="py-14 border-t border-[var(--line)]">
+  <p class="eyebrow mb-3">Seção 4</p>
+  <h2 class="text-2xl md:text-3xl font-bold mb-6">Empresas que elevaram o nível</h2>
+  <div class="block p-6">
+    <p class="text-xs text-[var(--ink3)] mb-4 uppercase tracking-wide">Carrossel de logos de clientes</p>
+    <div class="grid grid-cols-3 md:grid-cols-6 gap-4">
+      <div class="ph h-14">Logo</div><div class="ph h-14">Logo</div><div class="ph h-14">Logo</div>
+      <div class="ph h-14">Logo</div><div class="ph h-14">Logo</div><div class="ph h-14">Logo</div>
+    </div>
+  </div>
+  <div class="mt-10">
+    <p class="eyebrow mb-4">Depoimentos</p>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="block p-6">
+        <div class="flex gap-4 items-start">
+          <div class="ph w-14 h-14 shrink-0 rounded-full">Foto</div>
+          <div>
+            <p class="text-sm leading-relaxed mb-3">"A ELEVO trouxe direção pro nosso próximo passo. Saímos do achismo e estruturamos o crescimento com método. Em poucos meses, a operação parou de depender só de mim."</p>
+            <p class="font-semibold text-sm">[Nome do cliente]</p>
+            <p class="text-xs text-[var(--ink3)]">CEO / Diretor &middot; [Empresa]</p>
+          </div>
+        </div>
+      </div>
+      <div class="block p-6">
+        <div class="flex gap-4 items-start">
+          <div class="ph w-14 h-14 shrink-0 rounded-full">Foto</div>
+          <div>
+            <p class="text-sm leading-relaxed mb-3">[Depoimento real do cliente - a inserir]</p>
+            <p class="font-semibold text-sm">[Nome do cliente]</p>
+            <p class="text-xs text-[var(--ink3)]">Cargo &middot; [Empresa]</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== S5 - RESULTADOS ===================== -->
+<section id="resultados" class="py-14 border-t border-[var(--line)]">
+  <p class="eyebrow mb-3">Seção 5</p>
+  <h2 class="text-2xl md:text-3xl font-bold mb-6">Não entregamos projetos para ficar na gaveta</h2>
+  <div class="grid sm:grid-cols-2 gap-3 max-w-3xl">
+    <div class="block p-4 text-sm">Mais clareza sobre onde crescer</div>
+    <div class="block p-4 text-sm">Projetos práticos que geram resultado real</div>
+    <div class="block p-4 text-sm">Equipes mais produtivas</div>
+    <div class="block p-4 text-sm">Melhor posicionamento no mercado</div>
+    <div class="block p-4 text-sm">Novas oportunidades de receita</div>
+    <div class="block p-4 text-sm">Maior capacidade de execução</div>
+    <div class="block p-4 text-sm sm:col-span-2">Acompanhamento para garantir evolução na prática</div>
+  </div>
+</section>
+
+<!-- ===================== S6 - COMO UM PROJETO ACONTECE ===================== -->
+<section id="processo" class="py-14 border-t border-[var(--line)]">
+  <p class="eyebrow mb-3">Seção 6</p>
+  <h2 class="text-2xl md:text-3xl font-bold mb-3">Como um projeto acontece</h2>
+  <p class="text-[var(--ink2)] mb-8 max-w-2xl">Do mapeamento à execução. Cada projeto é desenhado de acordo com o momento, desafio e objetivos da empresa.</p>
+  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+    <div class="block p-5">
+      <p class="eyebrow mb-2">Etapa 01 | Pensar</p>
+      <h3 class="font-bold mb-1">Entendemos o momento da empresa</h3>
+      <p class="text-sm text-[var(--ink2)]">Mapeamos desafios, oportunidades e prioridades para destravar o próximo nível.</p>
+    </div>
+    <div class="block p-5">
+      <p class="eyebrow mb-2">Etapa 02 | Decidir</p>
+      <h3 class="font-bold mb-1">Estruturamos o caminho</h3>
+      <p class="text-sm text-[var(--ink2)]">Transformamos informações em direcionamentos estratégicos.</p>
+    </div>
+    <div class="block p-5">
+      <p class="eyebrow mb-2">Etapa 03 | Agir</p>
+      <h3 class="font-bold mb-1">Construímos junto</h3>
+      <p class="text-sm text-[var(--ink2)]">Desenvolvemos soluções com quem vai executá-las, integrando estratégia e prática.</p>
+    </div>
+    <div class="block p-5">
+      <p class="eyebrow mb-2">Etapa 04 | Evoluir</p>
+      <h3 class="font-bold mb-1">Acompanhamento e Evolução</h3>
+      <p class="text-sm text-[var(--ink2)]">Ajudamos a transformar planos em ações práticas acelerando os resultados.</p>
+    </div>
+  </div>
+  <div class="mb-6">
+    <p class="eyebrow mb-3">Ferramentas utilizadas</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="chip">Design Thinking</span><span class="chip">OKRs</span><span class="chip">Canvas</span>
+      <span class="chip">Kanban</span><span class="chip">Scrum</span><span class="chip">Design Sprint</span>
+      <span class="chip">Squads</span><span class="chip">SMART</span>
+    </div>
+  </div>
+  <button class="btn btn-fill" onclick="wa()">Quero orçamento &rarr; WhatsApp</button>
+</section>
+
+<!-- ===================== S7 - SOBRE ===================== -->
+<section id="sobre" class="py-14 border-t border-[var(--line)]">
+  <p class="eyebrow mb-3">Seção 7</p>
+  <h2 class="text-2xl md:text-3xl font-bold mb-4">Sobre a Elevo</h2>
+  <div class="grid md:grid-cols-2 gap-8 items-start">
+    <div class="space-y-4 text-[var(--ink2)]">
+      <p>A ELEVO existe para ajudar empresas a avançarem para o próximo nível de crescimento.</p>
+      <p>Trabalhamos com organizações que já conquistaram espaço no mercado, mas perceberam que continuar fazendo mais do mesmo não será suficiente para alcançar o futuro que desejam.</p>
+      <p>Destravamos o potencial da sua empresa estruturando como ela pensa, decide e executa. Ficamos do seu lado para garantir que a mudança aconteça na prática para gerar resultado real.</p>
+      <button class="btn btn-fill" onclick="wa()">Fale com a gente &rarr; WhatsApp</button>
+    </div>
+    <div class="grid grid-cols-3 gap-3">
+      <div class="block p-4 text-center"><div class="text-xl font-bold">+200</div><div class="text-xs text-[var(--ink2)]">empresas atendidas</div></div>
+      <div class="block p-4 text-center"><div class="text-xl font-bold">3x</div><div class="text-xs text-[var(--ink2)]">mais performance e resultados</div></div>
+      <div class="block p-4 text-center"><div class="text-xl font-bold">Nacional</div><div class="text-xs text-[var(--ink2)]">abrangência</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== S8 - EXECUTIVOS ===================== -->
+<section id="executivos" class="py-14 border-t border-[var(--line)]">
+  <p class="eyebrow mb-3">Seção 8</p>
+  <h2 class="text-2xl md:text-3xl font-bold mb-6">Executivos</h2>
+  <div class="grid sm:grid-cols-2 gap-5 max-w-3xl">
+    <div class="block p-5 flex gap-4 items-center">
+      <div class="ph w-20 h-20 shrink-0 rounded-full">Foto</div>
+      <div>
+        <h3 class="font-bold">Jessica Fahl</h3>
+        <p class="text-sm text-[var(--ink2)]">Executiva de Inovação e gestora de negócios inovadores</p>
+        <span class="text-xs text-[var(--ink3)] cursor-pointer" onclick="toast('Abre LinkedIn (no site final)')">LinkedIn &rarr;</span>
+      </div>
+    </div>
+    <div class="block p-5 flex gap-4 items-center">
+      <div class="ph w-20 h-20 shrink-0 rounded-full">Foto</div>
+      <div>
+        <h3 class="font-bold">Guilherme Silva</h3>
+        <p class="text-sm text-[var(--ink2)]">Executivo de Inovação e gestor de performance e pessoas</p>
+        <span class="text-xs text-[var(--ink3)] cursor-pointer" onclick="toast('Abre LinkedIn (no site final)')">LinkedIn &rarr;</span>
+      </div>
+    </div>
+  </div>
+  <div class="mt-6"><button class="btn btn-fill" onclick="wa()">Fale com a gente &rarr; WhatsApp</button></div>
+</section>
+
+<!-- ===================== S9 - PRÓXIMO PASSO + CALENDÁRIO ===================== -->
+<section id="agendar" class="py-14 border-t border-[var(--line)]">
+  <p class="eyebrow mb-3">Seção 9</p>
+  <h2 class="text-2xl md:text-3xl font-bold mb-3">Vamos conversar sobre a sua empresa.</h2>
+  <p class="text-[var(--ink2)] max-w-2xl">Uma conversa rápida para entender se faz sentido trabalharmos juntos.</p>
+  <p class="text-[var(--ink2)] mb-8 max-w-2xl">Sem compromisso, sem pitch de venda.</p>
+
+  <div class="grid lg:grid-cols-2 gap-5 items-stretch">
+    <!-- Formulário -->
+    <div class="block p-6">
+      <div id="formPanel">
+        <p class="font-semibold mb-1">Deixe seu contato</p>
+        <p class="text-xs text-[var(--ink3)] mb-4">Retornamos para marcar a conversa.</p>
+        <div class="space-y-3">
+          <input type="text" placeholder="Nome" class="w-full border border-[var(--line)] rounded-lg px-3 py-2 text-sm bg-white">
+          <input type="tel" placeholder="Telefone / WhatsApp" class="w-full border border-[var(--line)] rounded-lg px-3 py-2 text-sm bg-white">
+          <input type="email" placeholder="E-mail" class="w-full border border-[var(--line)] rounded-lg px-3 py-2 text-sm bg-white">
+          <button class="btn btn-fill w-full" onclick="sendForm()">Enviar contato</button>
+        </div>
+      </div>
+      <div id="formDone" class="hidden text-center py-10">
+        <div class="text-3xl mb-2">&#10003;</div>
+        <p class="font-semibold mb-1">Contato enviado</p>
+        <p class="text-xs text-[var(--ink3)]">Simulação. No site final, isto registra o lead e dispara a notificação.</p>
+      </div>
+    </div>
+
+    <!-- Agendamento direto -->
+    <div class="block p-6 flex flex-col justify-center text-center">
+      <p class="font-semibold mb-1">Prefere já marcar?</p>
+      <p class="text-xs text-[var(--ink3)] mb-4">Escolha um horário direto na agenda da ELEVO.</p>
+      <button class="btn btn-fill mb-4" onclick="toast('Abre o Google Agenda (no site final)')">Agendar pelo Google Agenda</button>
+      <p class="text-xs text-[var(--ink3)] mb-2">ou fale direto no WhatsApp</p>
+      <button class="btn btn-out" onclick="wa()">WhatsApp (43) 99158-8212</button>
+    </div>
+  </div>
+
+  <div class="mt-6">
+    <button class="btn btn-out" onclick="go('solucao')">Ver serviços &uarr;</button>
+  </div>
+</section>
+
+<!-- ===================== S10 - NA MÍDIA ===================== -->
+<section id="midia" class="py-14 border-t border-[var(--line)]">
+  <p class="eyebrow mb-3">Seção 10</p>
+  <h2 class="text-2xl md:text-3xl font-bold mb-6">Na mídia</h2>
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="block p-5 flex gap-3 items-center">
+      <div class="ph w-12 h-12 shrink-0">Logo</div>
+      <div>
+        <p class="font-semibold text-sm">"Na batalha da PI"</p>
+        <span class="text-xs text-[var(--ink3)] cursor-pointer" onclick="toast('Abre matéria no UOL Economia (no site final)')">UOL Economia &rarr;</span>
+      </div>
+    </div>
+    <div class="block p-5 flex gap-3 items-center opacity-70">
+      <div class="ph w-12 h-12 shrink-0">Logo</div>
+      <div><p class="font-semibold text-sm">Título da matéria</p><span class="text-xs text-[var(--ink3)]">Nome da mídia &rarr;</span></div>
+    </div>
+    <div class="block p-5 flex gap-3 items-center opacity-70">
+      <div class="ph w-12 h-12 shrink-0">Logo</div>
+      <div><p class="font-semibold text-sm">Título da matéria</p><span class="text-xs text-[var(--ink3)]">Nome da mídia &rarr;</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== S11 - CONTEÚDOS ===================== -->
+<section id="conteudos" class="py-14 border-t border-[var(--line)]">
+  <p class="eyebrow mb-3">Seção 11</p>
+  <h2 class="text-2xl md:text-3xl font-bold mb-6">Conteúdos</h2>
+  <div class="grid sm:grid-cols-3 gap-4">
+    <div class="block overflow-hidden">
+      <div class="ph h-32 rounded-none">Imagem do post</div>
+      <div class="p-4"><p class="font-semibold text-sm mb-1">Título do artigo do blog</p><p class="text-xs text-[var(--ink3)]">Resumo curto do conteúdo</p></div>
+    </div>
+    <div class="block overflow-hidden">
+      <div class="ph h-32 rounded-none">Imagem do post</div>
+      <div class="p-4"><p class="font-semibold text-sm mb-1">Título do artigo do blog</p><p class="text-xs text-[var(--ink3)]">Resumo curto do conteúdo</p></div>
+    </div>
+    <div class="block overflow-hidden">
+      <div class="ph h-32 rounded-none">Imagem do post</div>
+      <div class="p-4"><p class="font-semibold text-sm mb-1">Título do artigo do blog</p><p class="text-xs text-[var(--ink3)]">Resumo curto do conteúdo</p></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== RODAPÉ ===================== -->
+<footer class="bg-[var(--block)] border-t border-[var(--line)]">
+  <div class="max-w-6xl mx-auto px-5 py-12">
+    <div class="grid sm:grid-cols-3 gap-8 mb-10">
+      <div>
+        <p class="text-lg font-bold mb-3">elevo</p>
+        <p class="text-sm text-[var(--ink2)]">contato@elevobr.com.br</p>
+        <p class="text-sm text-[var(--ink2)]">WhatsApp (43) 99158-8212</p>
+        <p class="text-sm text-[var(--ink2)]">elevobr.com.br</p>
+      </div>
+      <div>
+        <p class="eyebrow mb-3">Navegação</p>
+        <div class="flex flex-col gap-1 text-sm text-[var(--ink2)]">
+          <span class="cursor-pointer hover:text-[var(--ink)]" onclick="go('head')">Início</span>
+          <span class="cursor-pointer hover:text-[var(--ink)]" onclick="go('sobre')">Elevo</span>
+          <span class="cursor-pointer hover:text-[var(--ink)]" onclick="go('executivos')">Executivos</span>
+          <span class="cursor-pointer hover:text-[var(--ink)]" onclick="go('solucao')">Solução</span>
+          <span class="cursor-pointer hover:text-[var(--ink)]" onclick="go('midia')">Na mídia</span>
+          <span class="cursor-pointer hover:text-[var(--ink)]" onclick="go('conteudos')">Blog</span>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow mb-3">Políticas</p>
+        <div class="flex flex-col gap-1 text-sm text-[var(--ink2)] mb-5">
+          <span class="cursor-pointer hover:text-[var(--ink)]" onclick="toast('Abre Termos de Uso')">Termos de Uso</span>
+          <span class="cursor-pointer hover:text-[var(--ink)]" onclick="toast('Abre Política de Privacidade')">Política de Privacidade</span>
+        </div>
+        <div class="flex flex-col gap-2">
+          <button class="btn btn-fill" onclick="wa()">Contratar &rarr; WhatsApp</button>
+          <button class="btn btn-out" onclick="wa()">Agendar uma reunião &rarr; WhatsApp</button>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-[var(--line)] pt-6 text-center">
+      <p class="text-xs text-[var(--ink3)]">Este é um wireframe estrutural. A identidade visual final (cores, tipografia, imagens e tratamentos) será criada na fase de implementação, com base no design system aprovado separadamente.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== MODAL: DETALHE DA FRENTE NEGÓCIO ===================== -->
+<div id="frenteOverlay" class="overlay" onclick="overlayClick(event)">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-head">
+      <div>
+        <p class="eyebrow mb-1">Frente &middot; Negócio</p>
+        <h3 class="text-xl font-bold">Transformar potencial em resultado</h3>
+      </div>
+      <button class="modal-x" onclick="closeFrente()" aria-label="Fechar">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p class="text-sm text-[var(--ink2)] mb-6">Quando o modelo atual deixa de sustentar o próximo nível, é hora de repensar como sua empresa gera valor, cresce e se diferencia.</p>
+
+      <p class="eyebrow mb-2">Sinais de que você precisa disso</p>
+      <div class="flex flex-wrap gap-2 mb-6">
+        <span class="chip">Esforço sem resultado</span>
+        <span class="chip">Modelo de negócio ultrapassado</span>
+      </div>
+
+      <p class="eyebrow mb-2">O que fazemos nessa frente</p>
+      <div class="grid sm:grid-cols-2 gap-3 mb-6">
+        <div class="block p-4 text-sm text-[var(--ink3)]">Entregável / sub-serviço (a definir)</div>
+        <div class="block p-4 text-sm text-[var(--ink3)]">Entregável / sub-serviço (a definir)</div>
+        <div class="block p-4 text-sm text-[var(--ink3)]">Entregável / sub-serviço (a definir)</div>
+        <div class="block p-4 text-sm text-[var(--ink3)]">Entregável / sub-serviço (a definir)</div>
+      </div>
+
+      <p class="eyebrow mb-2">O resultado</p>
+      <div class="block p-4 text-sm font-medium mb-6">Sua empresa implanta novas formas de crescer, vender e competir.</div>
+
+      <div class="anno">O que entra neste detalhe? Confirmar com o cliente: lista de sub-serviços/entregáveis, ferramentas específicas da frente, duração típica do projeto, um mini-case com número, ou tudo isso. As frentes <b>Mercado</b> e <b>Pessoas</b> seguiriam exatamente este mesmo padrão de modal.</div>
+
+      <div class="flex flex-wrap gap-3">
+        <button class="btn btn-fill" onclick="wa()">Conversar &rarr; WhatsApp</button>
+        <button class="btn btn-out" onclick="closeFrente();go('agendar');">Agendar conversa &darr;</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+/* ---------- navegação interna (scroll suave, sem href externo) ---------- */
+function go(id){
+  var el = document.getElementById(id);
+  if(!el) return;
+  var y = el.getBoundingClientRect().top + window.pageYOffset - 76;
+  window.scrollTo({top:y, behavior:'smooth'});
+}
+
+/* ---------- indicador de seção ativa no menu ---------- */
+var navMap = {head:'head', sobre:'sobre', executivos:'executivos', solucao:'solucao', midia:'midia', conteudos:'conteudos'};
+var obs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      var id = e.target.id;
+      document.querySelectorAll('.navlink').forEach(function(n){
+        n.classList.toggle('active', n.getAttribute('data-nav')===id);
+      });
+    }
+  });
+},{rootMargin:'-45% 0px -50% 0px'});
+Object.values(navMap).forEach(function(id){
+  var el=document.getElementById(id); if(el) obs.observe(el);
+});
+
+/* ---------- toast + WhatsApp (mostra destino sem sair da página) ---------- */
+var t;
+function toast(msg){
+  var el=document.getElementById('toast');
+  el.textContent=msg; el.classList.add('show');
+  clearTimeout(t); t=setTimeout(function(){el.classList.remove('show');},2200);
+}
+function wa(){ toast('Abre o WhatsApp (43) 99158-8212 (no site final)'); }
+
+/* ---------- anotações on/off ---------- */
+function toggleAnno(){
+  document.body.classList.toggle('hide-anno');
+  var hidden = document.body.classList.contains('hide-anno');
+  document.getElementById('annoToggle').textContent = hidden ? 'Mostrar anotações' : 'Ocultar anotações';
+}
+
+/* ---------- formulário de contato (simulado) ---------- */
+function sendForm(){
+  document.getElementById('formPanel').classList.add('hidden');
+  document.getElementById('formDone').classList.remove('hidden');
+}
+
+/* ---------- modal frente Negócio ---------- */
+function openFrente(){ document.getElementById('frenteOverlay').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeFrente(){ document.getElementById('frenteOverlay').classList.remove('open'); document.body.style.overflow=''; }
+function overlayClick(e){ if(e.target.id==='frenteOverlay') closeFrente(); }
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeFrente(); });
+</script>
+</body>
+</html>
