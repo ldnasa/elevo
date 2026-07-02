@@ -148,8 +148,12 @@ function initHeroShader(canvas, staticFrame) {
     uniform vec2 pointer;  // 0..1 canvas space, y up; rests at center
     uniform float scroll;  // 0..1, hero scrolled out of view
 
+    /* sin()-free hash: portable across ANGLE/driver backends (large-arg
+       sin() loses precision on some integrated-GPU paths and washes out) */
     float hash(vec2 p) {
-      return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+      p = fract(p * vec2(123.34, 456.21));
+      p += dot(p, p + 45.32);
+      return fract(p.x * p.y);
     }
 
     float vnoise(vec2 p) {
