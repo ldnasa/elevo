@@ -1,0 +1,9 @@
+<svg viewBox="0 0 1295 360" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <path d="M1295 344C1295 352.837 1287.84 360 1279 360H16C7.16344 360 0 352.837 0 344V110C0 101.163 7.16344 94 16 94H1064.22C1069.25 94 1073.99 91.6293 1077.02 87.6009L1137.93 6.39907C1140.95 2.37072 1145.69 0 1150.73 0H1279C1287.84 0 1295 7.16344 1295 16V344Z" fill="url(#footerGradDesktop)"/>
+  <defs>
+    <linearGradient id="footerGradDesktop" x1="171.597" y1="-141.32" x2="170.5" y2="359.998" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B882E8"/>
+      <stop offset="1" stop-color="#FF4817"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -81,6 +81,120 @@ document.querySelectorAll("dialog.frente-modal").forEach((dialog) => {
   });
 });
 
+/* ---------- carrossel genérico (depoimentos, mídia) ---------- */
+function initCarousel(root, config) {
+  const track = root.querySelector(config.track);
+  const slides = [...root.querySelectorAll(config.slide)];
+  const viewport = root.querySelector(config.viewport);
+  const prevBtn = root.querySelector(config.prev);
+  const nextBtn = root.querySelector(config.next);
+  if (!track || !slides.length) return;
+
+  let index = 0;
+
+  function goTo(nextIndex) {
+    index = (nextIndex + slides.length) % slides.length;
+    track.style.transform = `translateX(-${index * 100}%)`;
+    slides.forEach((slide, i) => {
+      slide.classList.toggle("is-active", i === index);
+      slide.setAttribute("aria-hidden", String(i !== index));
+    });
+  }
+
+  prevBtn?.addEventListener("click", () => goTo(index - 1));
+  nextBtn?.addEventListener("click", () => goTo(index + 1));
+
+  let touchStartX = 0;
+  viewport?.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  viewport?.addEventListener("touchend", (e) => {
+    const delta = e.changedTouches[0].screenX - touchStartX;
+    if (Math.abs(delta) < 40) return;
+    goTo(index + (delta < 0 ? 1 : -1));
+  }, { passive: true });
+
+  slides.forEach((slide, i) => slide.setAttribute("aria-hidden", String(i !== 0)));
+
+  root.setAttribute("tabindex", "0");
+  viewport?.setAttribute("tabindex", "0");
+  const onKeydown = (e) => {
+    if (e.key === "ArrowLeft") goTo(index - 1);
+    if (e.key === "ArrowRight") goTo(index + 1);
+  };
+  root.addEventListener("keydown", onKeydown);
+  viewport?.addEventListener("keydown", onKeydown);
+}
+
+initCarousel(document.querySelector("[data-depo-carousel]"), {
+  track: ".depo-carousel-track",
+  slide: ".depo-slide",
+  viewport: ".depo-carousel-viewport",
+  prev: ".depo-nav--prev",
+  next: ".depo-nav--next",
+});
+
+initCarousel(document.querySelector("[data-midia-carousel]"), {
+  track: ".midia-carousel-track",
+  slide: ".midia-slide",
+  viewport: ".midia-carousel-viewport",
+  prev: ".midia-nav--prev",
+  next: ".midia-nav--next",
+});
+
+/* ---------- stat ticker (Seções 5 e 7) ---------- */
+function formatStatValue(el, value) {
+  const prefix = el.dataset.prefix || "";
+  const suffix = el.dataset.suffix || "";
+  return `${prefix}${value}${suffix}`;
+}
+
+function runStatTicker(el) {
+  if (el.dataset.tickerDone === "true") return;
+  const target = Number(el.dataset.count);
+  if (!Number.isFinite(target)) return;
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reducedMotion) {
+    el.textContent = formatStatValue(el, target);
+    el.dataset.tickerDone = "true";
+    return;
+  }
+
+  const duration = 1400;
+  const start = performance.now();
+
+  function frame(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.round(target * eased);
+    el.textContent = formatStatValue(el, current);
+    if (progress < 1) {
+      requestAnimationFrame(frame);
+    } else {
+      el.dataset.tickerDone = "true";
+    }
+  }
+
+  el.textContent = formatStatValue(el, 0);
+  requestAnimationFrame(frame);
+}
+
+const statTickers = document.querySelectorAll(".stat-ticker[data-count]");
+if (statTickers.length) {
+  const tickerObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        runStatTicker(entry.target);
+        tickerObserver.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.35 }
+  );
+  statTickers.forEach((node) => tickerObserver.observe(node));
+}
+
 /* ---------- lead form (Seção 9) ----------
    Destino do lead ainda indefinido (ver CLAUDE.md): por ora valida e abre o
    WhatsApp com a mensagem preenchida. Trocar por endpoint real quando definido. */
@@ -112,13 +226,28 @@ if (leadForm) {
   });
 }
 
-/* ---------- hero H1 word-fade (once, hero only) ---------- */
-const heroTitle = document.querySelector(".js-hero-title");
-if (heroTitle && !prefersReducedMotion && !staticMode) {
-  const words = heroTitle.textContent.trim().split(/\s+/);
-  heroTitle.innerHTML = words
-    .map((w, i) => `<span class="word" style="animation-delay:${550 + i * 55}ms">${w}</span>`)
-    .join(" ");
+/* ---------- hero A/B toggle (Figma review) ---------- */
+const heroComposer = document.getElementById("heroComposer");
+const heroAbToggle = document.getElementById("heroAbToggle");
+const heroVariants = ["a", "c"];
+const heroVariantLabels = { a: "A", c: "B" };
+
+if (heroComposer && heroAbToggle) {
+  const panels = heroComposer.querySelectorAll("[data-hero-panel]");
+  const setHeroVariant = (variant) => {
+    heroComposer.dataset.variant = variant;
+    heroAbToggle.textContent = heroVariantLabels[variant];
+    heroAbToggle.setAttribute("aria-label", `Hero opção ${heroVariantLabels[variant]}. Clique para alternar.`);
+    heroAbToggle.setAttribute("aria-pressed", "false");
+    panels.forEach((panel) => {
+      panel.hidden = panel.dataset.heroPanel !== variant;
+    });
+  };
+  heroAbToggle.addEventListener("click", () => {
+    const idx = heroVariants.indexOf(heroComposer.dataset.variant);
+    setHeroVariant(heroVariants[(idx + 1) % heroVariants.length]);
+  });
+  setHeroVariant(heroComposer.dataset.variant || "a");
 }
 
 /* ---------- hero shader: subtle malva/roxo/laranja gradient drift ----------
@@ -323,9 +452,8 @@ function initHeroShader(canvas, staticFrame) {
   requestAnimationFrame(frame);
 }
 
-// ?static renders one frozen shader frame and stops the loop (screenshot/idle-capture
-// tooling times out on a perpetual rAF loop). Both the desktop and mobile canvases
-// init; the one whose shape is display:none stays paused (its IntersectionObserver
-// never fires), so only the visible composition animates.
-initHeroShader(document.getElementById("heroShader"), staticMode);
-initHeroShader(document.getElementById("heroShaderM"), staticMode);
+// Hero shader (opções C e D)
+["heroShader", "heroShaderM", "heroShaderA", "heroShaderAM"].forEach((id) => {
+  const canvas = document.getElementById(id);
+  if (canvas) initHeroShader(canvas);
+});

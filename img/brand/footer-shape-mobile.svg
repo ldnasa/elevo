@@ -1,0 +1,9 @@
+<svg viewBox="0 0 343 813" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <path d="M343 797C343 805.837 335.837 813 327 813H185.454C177.585 813 170.884 807.278 169.651 799.506L152.049 688.494C150.817 680.722 144.116 675 136.246 675H16C7.16345 675 0 667.837 0 659V16C0 7.16344 7.16344 0 16 0H327C335.837 0 343 7.16344 343 16V797Z" fill="url(#footerGradMobile)"/>
+  <defs>
+    <linearGradient id="footerGradMobile" x1="45.4501" y1="-200.781" x2="28.508" y2="812.717" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B882E8"/>
+      <stop offset="1" stop-color="#FF4817"/>
+    </linearGradient>
+  </defs>
+</svg>
