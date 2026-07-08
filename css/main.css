@@ -26,6 +26,7 @@ svg {
   stroke-width: 1.75;
   stroke-linecap: round;
   stroke-linejoin: round;
+  padding: 0;
 }
 
 h1, h2, h3 {
@@ -201,7 +202,10 @@ a[aria-disabled="true"] { pointer-events: none; }
   padding-block: clamp(8px, 1.2vw, 16px) clamp(40px, 6vw, 72px);
 }
 
-.hero-wrap { position: relative; }
+.hero-wrap {
+  position: relative;
+  padding-block: 0;
+}
 
 .hero-composer {
   position: relative;
@@ -287,17 +291,19 @@ a[aria-disabled="true"] { pointer-events: none; }
   margin-inline: auto;
   aspect-ratio: 1291 / 816;
   container-type: inline-size;
+  padding: 0;
 }
 
-.hero-variant--c .hero-bg { position: absolute; inset: 0; z-index: 1; }
-.hero-variant--c .hero-shape { position: absolute; inset: 0; width: 100%; height: 100%; }
-.hero-variant--c .hero-shape path { stroke: none; }
+.hero-variant--c .hero-bg { position: absolute; inset: 0; z-index: 1; padding: 0; }
+.hero-variant--c .hero-shape { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; }
+.hero-variant--c .hero-shape path { stroke: none; padding: 0; vertical-align: bottom; }
 
 .hero-variant--c #heroShader {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  padding-block: 0;
   clip-path: url(#heroGradClip);
   opacity: 1;
   pointer-events: none;
@@ -366,7 +372,14 @@ a[aria-disabled="true"] { pointer-events: none; }
   top: 4.3%;
   right: 3.3%;
   z-index: 3;
-  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  height: fit-content;
+  margin-top: -24px;
+  margin-bottom: -24px;
+  padding-top: 0;
+  padding-bottom: 0;
+  vertical-align: top;
   color: #1e1e1e;
   font-size: clamp(28px, 4.34vw, 56px);
   line-height: 0.92;
@@ -432,6 +445,7 @@ a[aria-disabled="true"] { pointer-events: none; }
   max-width: 1291px;
   margin-inline: auto;
   aspect-ratio: 1291 / 655;
+  padding-block: var(--space-4);
   overflow: visible;
 }
 
@@ -440,6 +454,7 @@ a[aria-disabled="true"] { pointer-events: none; }
   position: relative;
   width: 100%;
   height: 100%;
+  padding-block: 0;
 }
 
 .hero-a-mobile { display: none; }
@@ -456,6 +471,8 @@ a[aria-disabled="true"] { pointer-events: none; }
   right: 0;
   top: 0;
   bottom: -14%;
+  padding-block: 0;
+  margin-block: var(--space-1);
 }
 
 .hero-a-m-visual {
@@ -475,6 +492,7 @@ a[aria-disabled="true"] { pointer-events: none; }
   inset: 0;
   width: 100%;
   height: 100%;
+  padding-block: 0;
   opacity: 1;
   pointer-events: none;
 }
@@ -543,7 +561,10 @@ a[aria-disabled="true"] { pointer-events: none; }
   top: 1.807%;
   width: 44.99%;
   max-width: 581px;
+  height: 161px;
   margin: 0;
+  padding-top: var(--space-5);
+  padding-bottom: var(--space-5);
   font-size: clamp(28px, 4.34vw, 56px);
   line-height: 0.92;
   letter-spacing: -0.04em;
@@ -552,6 +573,7 @@ a[aria-disabled="true"] { pointer-events: none; }
 
 .hero-headline--a .hero-headline-line {
   display: block;
+  height: fit-content;
 }
 
 .hero-a-card {
@@ -3192,7 +3214,7 @@ a[aria-disabled="true"] { pointer-events: none; }
     display: flex;
     flex-direction: column;
     gap: var(--space-6);
-    padding-bottom: var(--space-2);
+    padding: 0;
   }
 
   .hero-c-m-stage {
