@@ -91,6 +91,30 @@ function initCarousel(root, config) {
   if (!track || !slides.length) return;
 
   let index = 0;
+  let dotButtons = [];
+
+  if (config.dots !== false) {
+    const carouselShell = viewport?.parentElement;
+    const dotsContainer = document.createElement("div");
+    dotsContainer.className = "carousel-dots";
+    dotsContainer.setAttribute("role", "tablist");
+    dotsContainer.setAttribute("aria-label", config.dotsLabel || "Slides do carrossel");
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "carousel-dot";
+      if (i === 0) dot.classList.add("is-active");
+      dot.setAttribute("role", "tab");
+      dot.setAttribute("aria-label", `Slide ${i + 1} de ${slides.length}`);
+      dot.setAttribute("aria-selected", i === 0 ? "true" : "false");
+      dot.addEventListener("click", () => goTo(i));
+      dotsContainer.appendChild(dot);
+      dotButtons.push(dot);
+    });
+
+    carouselShell?.appendChild(dotsContainer);
+  }
 
   function goTo(nextIndex) {
     index = (nextIndex + slides.length) % slides.length;
@@ -98,6 +122,10 @@ function initCarousel(root, config) {
     slides.forEach((slide, i) => {
       slide.classList.toggle("is-active", i === index);
       slide.setAttribute("aria-hidden", String(i !== index));
+    });
+    dotButtons.forEach((dot, i) => {
+      dot.classList.toggle("is-active", i === index);
+      dot.setAttribute("aria-selected", String(i === index));
     });
   }
 
@@ -132,6 +160,7 @@ initCarousel(document.querySelector("[data-depo-carousel]"), {
   viewport: ".depo-carousel-viewport",
   prev: ".depo-nav--prev",
   next: ".depo-nav--next",
+  dotsLabel: "Depoimentos",
 });
 
 initCarousel(document.querySelector("[data-midia-carousel]"), {
@@ -140,6 +169,7 @@ initCarousel(document.querySelector("[data-midia-carousel]"), {
   viewport: ".midia-carousel-viewport",
   prev: ".midia-nav--prev",
   next: ".midia-nav--next",
+  dotsLabel: "Matérias na mídia",
 });
 
 /* ---------- stat ticker (Seções 5 e 7) ---------- */
