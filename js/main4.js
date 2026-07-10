@@ -186,9 +186,14 @@
     const dots = [...document.querySelectorAll('.depo-dot')];
     let depoIdx = 0;
     let depoTimer = 0;
+    let depoBusy = false;
 
     const renderDepo = (i) => {
-      depoIdx = (i + DEPOS.length) % DEPOS.length;
+      if (depoBusy) return;
+      const next = (i + DEPOS.length) % DEPOS.length;
+      if (next === depoIdx) return;
+      depoBusy = true;
+      depoIdx = next;
       const d = DEPOS[depoIdx];
       content.classList.add('swapping');
       logoEl.style.opacity = '0';
@@ -203,41 +208,62 @@
         logoEl.classList.toggle('logo-tint', d.tint);
         content.classList.remove('swapping');
         logoEl.style.opacity = '1';
-      }, 290);
+        depoBusy = false;
+      }, 220);
       dots.forEach((dot, di) => {
         dot.classList.toggle('is-active', di === depoIdx);
         dot.setAttribute('aria-selected', String(di === depoIdx));
       });
     };
 
-    logoEl.style.transition = 'opacity .28s ease';
+    logoEl.style.transition = 'opacity .22s ease';
     document.getElementById('depoPrev').addEventListener('click', () => renderDepo(depoIdx - 1));
     document.getElementById('depoNext').addEventListener('click', () => renderDepo(depoIdx + 1));
     dots.forEach((dot, di) => dot.addEventListener('click', () => renderDepo(di)));
 
-    /* swipe no mobile */
+    /* swipe fluido: threshold baixo + velocidade */
     let touchX = 0;
-    depoStage.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
-    depoStage.addEventListener('touchend', (e) => {
-      const dx = e.changedTouches[0].clientX - touchX;
-      if (Math.abs(dx) > 48) renderDepo(depoIdx + (dx < 0 ? 1 : -1));
+    let touchY = 0;
+    let touchT = 0;
+    let swiping = false;
+    depoStage.addEventListener('touchstart', (e) => {
+      touchX = e.touches[0].clientX;
+      touchY = e.touches[0].clientY;
+      touchT = performance.now();
+      swiping = true;
     }, { passive: true });
+    depoStage.addEventListener('touchend', (e) => {
+      if (!swiping) return;
+      swiping = false;
+      const dx = e.changedTouches[0].clientX - touchX;
+      const dy = e.changedTouches[0].clientY - touchY;
+      const dt = Math.max(1, performance.now() - touchT);
+      const vx = Math.abs(dx) / dt;
+      /* prioriza gesto horizontal; threshold baixo ou flick rápido */
+      if (Math.abs(dx) < Math.abs(dy) * 1.1) return;
+      if (Math.abs(dx) > 28 || vx > 0.45) {
+        renderDepo(depoIdx + (dx < 0 ? 1 : -1));
+      }
+    }, { passive: true });
+    depoStage.addEventListener('touchcancel', () => { swiping = false; }, { passive: true });
   }
 
-  /* na mídia: carrossel (setas desktop, dots + swipe mobile) */
+  /* na mídia: setas no desktop; scroll-snap nativo + dots no mobile */
   const midiaTrack = document.getElementById('midiaTrack');
   if (midiaTrack) {
+    const viewport = midiaTrack.closest('.midia-viewport');
     const cards = [...midiaTrack.querySelectorAll('.midia-card')];
     const prev = document.getElementById('midiaPrev');
     const next = document.getElementById('midiaNext');
     const mDots = [...document.querySelectorAll('.midia-dot')];
     let mIdx = 0;
 
+    const isSnapMode = () => window.matchMedia('(max-width: 860px)').matches;
+
     const step = () => cards[0].getBoundingClientRect().width + parseFloat(getComputedStyle(midiaTrack).gap);
 
-    const renderMidia = (i) => {
+    const syncDots = (i) => {
       mIdx = Math.max(0, Math.min(cards.length - 1, i));
-      midiaTrack.style.transform = `translateX(${-mIdx * step()}px)`;
       prev.disabled = mIdx === 0;
       next.disabled = mIdx === cards.length - 1;
       mDots.forEach((d, di) => {
@@ -246,16 +272,48 @@
       });
     };
 
-    prev.addEventListener('click', () => renderMidia(mIdx - 1));
-    next.addEventListener('click', () => renderMidia(mIdx + 1));
-    mDots.forEach((d, di) => d.addEventListener('click', () => renderMidia(di)));
-    window.addEventListener('resize', () => renderMidia(mIdx), { passive: true });
+    const goTo = (i, behavior = 'smooth') => {
+      const idx = Math.max(0, Math.min(cards.length - 1, i));
+      if (isSnapMode()) {
+        cards[idx].scrollIntoView({ behavior, inline: 'center', block: 'nearest' });
+        syncDots(idx);
+        return;
+      }
+      midiaTrack.style.transform = `translateX(${-idx * step()}px)`;
+      syncDots(idx);
+    };
 
-    let mTouchX = 0;
-    midiaTrack.addEventListener('touchstart', (e) => { mTouchX = e.touches[0].clientX; }, { passive: true });
-    midiaTrack.addEventListener('touchend', (e) => {
-      const dx = e.changedTouches[0].clientX - mTouchX;
-      if (Math.abs(dx) > 48) renderMidia(mIdx + (dx < 0 ? 1 : -1));
+    prev.addEventListener('click', () => goTo(mIdx - 1));
+    next.addEventListener('click', () => goTo(mIdx + 1));
+    mDots.forEach((d, di) => d.addEventListener('click', () => goTo(di)));
+
+    /* mobile: dots acompanham o scroll nativo */
+    let scrollRaf = 0;
+    viewport.addEventListener('scroll', () => {
+      if (scrollRaf || !isSnapMode()) return;
+      scrollRaf = requestAnimationFrame(() => {
+        scrollRaf = 0;
+        const vRect = viewport.getBoundingClientRect();
+        const center = vRect.left + vRect.width / 2;
+        let nearest = 0;
+        let best = Infinity;
+        cards.forEach((card, i) => {
+          const r = card.getBoundingClientRect();
+          const dist = Math.abs(r.left + r.width / 2 - center);
+          if (dist < best) { best = dist; nearest = i; }
+        });
+        if (nearest !== mIdx) syncDots(nearest);
+      });
+    }, { passive: true });
+
+    window.addEventListener('resize', () => {
+      if (isSnapMode()) {
+        midiaTrack.style.transform = '';
+        goTo(mIdx, 'auto');
+      } else {
+        viewport.scrollLeft = 0;
+        goTo(mIdx, 'auto');
+      }
     }, { passive: true });
   }
 
