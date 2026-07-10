@@ -1,0 +1,1002 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>elevo - estúdio de inovação estratégica</title>
+<meta name="description" content="A elevo desenvolve projetos estratégicos para estruturar o crescimento da sua empresa, abrir novas oportunidades e escalar o seu modelo de negócio.">
+<link rel="icon" type="image/svg+xml" href="./img/brand/elevo-simbolo-roxo.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<meta property="og:title" content="elevo - estúdio de inovação estratégica">
+<meta property="og:description" content="A elevo desenvolve projetos estratégicos para estruturar o crescimento da sua empresa, abrir novas oportunidades e escalar o seu modelo de negócio.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+
+<link rel="stylesheet" href="./design_system/tokens.css">
+<link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Pular para o conteúdo</a>
+
+<svg aria-hidden="true" class="sr-only" style="position:absolute;width:0;height:0;overflow:hidden;">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="m6 6 12 12"/><path d="m18 6-12 12"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m11 6-6 6 6 6"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></symbol>
+  <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></symbol>
+  <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></symbol>
+  <symbol id="i-instagram" viewBox="0 0 24 24"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></symbol>
+  <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></symbol>
+  <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></symbol>
+</svg>
+
+<!-- objectBoundingBox clips for the animated shader, matching the exact gradient paths -->
+<svg aria-hidden="true" width="0" height="0" style="position:absolute">
+  <defs>
+    <clipPath id="heroGradClip" clipPathUnits="objectBoundingBox">
+      <path d="M0.99999 0.32272 V0.94622 C0.99999 0.97592 0.98507 1.00000 0.96665 1.00000 H0.40615 C0.39731 1.00000 0.38883 0.99433 0.38258 0.98425 L0.00976 0.38267 C0.00351 0.37258 0.00000 0.35890 0.00000 0.34464 V0.05378 C0.00000 0.02408 0.01493 0.00000 0.03333 0.00000 H0.31950 C0.32836 0.00000 0.33686 0.00568 0.34312 0.01579 C0.39903 0.10601 0.43429 0.16289 0.49021 0.25313 C0.49648 0.26325 0.50498 0.26893 0.51385 0.26893 C0.58036 0.26893 0.86806 0.26893 0.96668 0.26893 C0.98508 0.26893 1.00000 0.29302 1.00000 0.32272 H0.99999 Z"/>
+    </clipPath>
+    <linearGradient id="frenteCornerGrad" x1="0" y1="0" x2="126" y2="141" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B882E8"/>
+      <stop offset="1" stop-color="#FF4817"/>
+    </linearGradient>
+    <clipPath id="heroGradClipM" clipPathUnits="objectBoundingBox">
+      <path d="M0.47365 0.12004 C0.48076 0.13140 0.49788 0.13884 0.51691 0.13884 H0.95335 C0.97912 0.13884 1.00000 0.15228 1.00000 0.16886 V0.96998 C1.00000 0.98656 0.97912 1.00000 0.95335 1.00000 H0.04665 C0.02088 1.00000 0.00000 0.98656 0.00000 0.96998 V0.03002 C0.00000 0.01344 0.02088 0.00000 0.04665 0.00000 H0.36694 C0.38597 0.00000 0.40309 0.00744 0.41020 0.01879 L0.47365 0.12004 Z"/>
+    </clipPath>
+    <clipPath id="heroAGradClip" clipPathUnits="objectBoundingBox">
+      <path d="M0.00001 0.43241 V0.92794 C0.00001 0.96773 0.01494 1.00000 0.03334 1.00000 H0.59385 C0.60269 1.00000 0.61117 0.99241 0.61742 0.97890 L0.99024 0.51274 C0.99649 0.49923 1.00000 0.48089 1.00000 0.46178 V0.07206 C1.00000 0.03227 0.98507 0.00000 0.96667 0.00000 H0.68050 C0.67164 0.00000 0.66314 0.00762 0.65688 0.02115 C0.60097 0.14204 0.56571 0.21826 0.50979 0.33917 C0.50352 0.35273 0.49502 0.36034 0.48615 0.36034 C0.41964 0.36034 0.13194 0.36034 0.03332 0.36034 C0.01492 0.36034 0.00000 0.39262 0.00000 0.43241 H0.00001 Z"/>
+    </clipPath>
+    <clipPath id="heroAGradClipM" clipPathUnits="objectBoundingBox">
+      <path d="M1.00000 0.97519 C1.00000 0.98889 0.97912 1.00000 0.95335 1.00000 H0.04665 C0.02088 1.00000 0.00000 0.98889 0.00000 0.97519 V0.21550 C0.00000 0.20180 0.02088 0.19070 0.04665 0.19070 H0.72308 C0.74251 0.19070 0.75991 0.18429 0.76675 0.17462 L0.87883 0.01608 C0.88567 0.00640 0.90306 0.00000 0.92250 0.00000 H0.95335 C0.97912 0.00000 1.00000 0.01111 1.00000 0.02481 V0.97519 Z"/>
+    </clipPath>
+  </defs>
+</svg>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand-logo" href="#top" aria-label="elevo - ir para o início">
+      <img class="logo-wordmark" src="./img/brand/elevo-logo-roxo.svg" alt="elevo" width="112" height="26">
+    </a>
+
+    <nav class="main-nav" aria-label="Navegação principal">
+      <a href="#top" class="active">início</a>
+      <a href="#sobre">a elevo</a>
+      <a href="#executivos">executivos</a>
+      <a href="#solucao">solução</a>
+      <a href="#midia">na mídia</a>
+      <a href="#conteudos">conteúdos</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="btn btn-primary" href="https://wa.me/5543991588212" target="_blank" rel="noopener noreferrer" aria-label="Falar com a elevo pelo WhatsApp">
+        <span class="full">Fale conosco</span>
+        <svg class="icon-fill"><use href="#i-whatsapp"/></svg>
+      </a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileNav">
+        <svg><use href="#i-menu"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav" aria-label="Navegação mobile">
+  <a href="#top">início</a>
+  <a href="#sobre">a elevo</a>
+  <a href="#executivos">executivos</a>
+  <a href="#solucao">solução</a>
+  <a href="#midia">na mídia</a>
+  <a href="#conteudos">conteúdos</a>
+  <a class="btn btn-primary" href="https://wa.me/5543991588212" target="_blank" rel="noopener noreferrer">
+    Conversar no WhatsApp <svg class="icon-fill"><use href="#i-whatsapp"/></svg>
+  </a>
+</nav>
+
+<main id="main">
+  <section id="top" class="hero">
+    <div class="wrap hero-wrap">
+      <div class="hero-composer" id="heroComposer" data-variant="a">
+        <!-- Opção A — hero desktop (Figma 11:58) + mobile (7:36) -->
+        <div class="hero-variant hero-variant--a" data-hero-panel="a">
+          <div class="hero-frame hero-frame--a">
+            <div class="hero-a-desktop">
+              <div class="hero-a-art" aria-hidden="true">
+                <svg class="hero-a-gradient" preserveAspectRatio="none" viewBox="0 0 1291 609" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0.013916 263.338V565.113C0.013916 589.347 19.2839 609 43.0458 609H766.659C778.069 609 789.021 604.377 797.089 596.148L1278.4 312.258C1286.47 304.029 1291 292.86 1291 281.223V43.8872C1291 19.6531 1271.73 0 1247.97 0H878.523C867.085 0 856.119 4.63758 848.037 12.8806C775.85 86.502 730.337 132.92 658.136 206.556C650.04 214.813 639.074 219.45 627.623 219.45C541.753 219.45 170.339 219.45 43.0181 219.45C19.2562 219.45 0 239.103 0 263.338H0.013916Z" fill="url(#heroAGradDesk)"/>
+                  <defs>
+                    <linearGradient id="heroAGradDesk" x1="645.134" y1="36.1967" x2="645.515" y2="609" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#B882E8"/>
+                      <stop offset="1" stop-color="#FF4817"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+                <canvas id="heroShaderA" aria-hidden="true"></canvas>
+              </div>
+              <div class="hero-a-layout">
+                <div class="hero-a-col hero-a-col--copy">
+                  <h1 class="hero-headline hero-headline--a">
+                    <span class="hero-headline-line">O crescimento</span>
+                    <span class="hero-headline-line">da sua empresa exige mais do que esforço</span>
+                  </h1>
+                  <div class="hero-a-card">
+                    <p class="hero-lead hero-lead--a">A elevo desenvolve projetos estratégicos para estruturar o crescimento da sua empresa, abrir novas oportunidades e escalar o seu modelo de negócio. Do plano à execução, do seu lado.</p>
+                    <div class="hero-ctas hero-ctas--a">
+                      <a class="btn btn-hero btn-hero-primary" href="https://wa.me/5543991588212" target="_blank" rel="noopener noreferrer">
+                        Fale no WhatsApp <svg class="icon-fill"><use href="#i-whatsapp"/></svg>
+                      </a>
+                      <a class="btn btn-hero btn-hero-outline" href="#solucao">Conheça as soluções</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="hero-a-portrait-wrap">
+                  <img class="hero-a-portrait" src="./img/hero/hero-a-portrait.jpg" alt="" width="541" height="520" fetchpriority="high">
+                </div>
+              </div>
+            </div>
+            <div class="hero-a-mobile">
+              <div class="hero-a-m-stage">
+                <div class="hero-a-m-visual" aria-hidden="true">
+                  <div class="hero-a-m-bg-wrap">
+                    <svg class="hero-a-m-bg" preserveAspectRatio="none" viewBox="0 0 343 645" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M343 629C343 637.837 335.837 645 327 645H16C7.16345 645 0 637.837 0 629V139C0 130.163 7.16344 123 16 123H248.018C254.682 123 260.649 118.869 262.994 112.63L301.439 10.3695C303.785 4.1312 309.751 0 316.416 0H327C335.837 0 343 7.16344 343 16V629Z" fill="url(#heroAGradMob)"/>
+                      <defs>
+                        <linearGradient id="heroAGradMob" x1="171.597" y1="31.6795" x2="170.5" y2="532.998" gradientUnits="userSpaceOnUse">
+                          <stop stop-color="#B882E8"/>
+                          <stop offset="1" stop-color="#FF4817"/>
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                    <canvas id="heroShaderAM" aria-hidden="true"></canvas>
+                  </div>
+                </div>
+                <div class="hero-a-m-portrait-wrap">
+                  <img class="hero-a-m-portrait" src="./img/hero/hero-a-portrait.jpg" alt="Executivos em reunião estratégica" width="304" height="280" loading="eager">
+                </div>
+              </div>
+              <h1 class="hero-headline hero-headline--am">
+                <span class="hero-headline-line">O crescimento</span>
+                <span class="hero-headline-line">da sua empresa exige</span>
+                <span class="hero-headline-line">mais do que esforço</span>
+              </h1>
+              <div class="hero-a-m-copy">
+                <p class="hero-lead hero-lead--am">A elevo desenvolve projetos estratégicos para estruturar o crescimento da sua empresa, abrir novas oportunidades e escalar o seu modelo de negócio. Do plano à execução, do seu lado.</p>
+                <div class="hero-ctas hero-ctas--am">
+                  <a class="btn btn-hero btn-hero-primary" href="https://wa.me/5543991588212" target="_blank" rel="noopener noreferrer">
+                    Fale no WhatsApp <svg class="icon-fill"><use href="#i-whatsapp"/></svg>
+                  </a>
+                  <a class="btn btn-hero btn-hero-outline" href="#solucao">Conheça as soluções</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Opção B — hero shader + card copy -->
+        <div class="hero-variant hero-variant--c" data-hero-panel="c" hidden>
+          <div class="hero-stage">
+            <div class="hero-bg hero-bg--desktop">
+              <svg class="hero-shape" preserveAspectRatio="none" viewBox="0 0 1291 816" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M311.33 816H43.032C19.2701 816 0 796.347 0 772.113V498.482C0 459.388 46.3592 439.805 73.4621 467.447L341.76 741.078C368.863 768.719 349.676 816 311.33 816Z" fill="#2F1533"/>
+                <path d="M1290.99 263.338V772.113C1290.99 796.347 1271.72 816 1247.95 816H524.341C512.931 816 501.979 811.377 493.911 803.148L12.6018 312.258C4.53333 304.029 0 292.86 0 281.223V43.8872C0 19.6531 19.2701 0 43.0319 0H412.477C423.915 0 434.881 4.63758 442.963 12.8806C515.15 86.502 560.663 132.92 632.864 206.556C640.96 214.813 651.926 219.45 663.377 219.45C749.247 219.45 1120.66 219.45 1247.98 219.45C1271.74 219.45 1291 239.103 1291 263.338H1290.99Z" fill="url(#heroGradFillC)"/>
+                <defs>
+                  <linearGradient id="heroGradFillC" x1="645.866" y1="48.5" x2="645.182" y2="816" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#B882E8"/>
+                    <stop offset="1" stop-color="#FF4817"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+              <canvas id="heroShader" aria-hidden="true"></canvas>
+            </div>
+            <div class="hero-c-m-stage">
+              <div class="hero-bg hero-bg--mobile">
+                <svg class="hero-shape" preserveAspectRatio="none" viewBox="0 0 343 533" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M162.461 63.9835C164.902 70.0363 170.774 74 177.3 74H327C335.837 74 343 81.1634 343 90V517C343 525.837 335.837 533 327 533H16C7.16345 533 0 525.837 0 517V16C0 7.16344 7.16344 0 16 0H125.861C132.387 0 138.259 3.96376 140.7 10.0165L162.461 63.9835Z" fill="url(#heroGradFillCM)"/>
+                  <defs>
+                    <linearGradient id="heroGradFillCM" x1="171.597" y1="31.6795" x2="170.5" y2="532.998" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#B882E8"/>
+                      <stop offset="1" stop-color="#FF4817"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+                <canvas id="heroShaderM" aria-hidden="true"></canvas>
+              </div>
+              <div class="hero-c-photo">
+                <img src="./img/hero/hero-b-photo.jpg" alt="Equipe em reunião estratégica com business model canvas" width="527" height="705" loading="eager">
+              </div>
+            </div>
+            <svg class="hero-darkblock-m" preserveAspectRatio="none" viewBox="0 0 126 141" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M110.672 141H15.2971C6.85016 141 0 133.334 0 123.882V17.1517C0 1.90302 16.4798 -5.73513 26.1144 5.04651L121.489 111.777C131.124 122.558 124.303 141 110.672 141Z" fill="#2F1533"/>
+            </svg>
+            <img class="hero-symbol" src="./img/brand/elevo-simbolo-branco.svg" alt="" aria-hidden="true">
+            <h1 class="hero-headline hero-headline--c">
+              <span class="hero-headline-line">O crescimento</span>
+              <span class="hero-headline-line">da sua empresa exige</span>
+              <span class="hero-headline-line">mais do que esforço</span>
+            </h1>
+            <div class="hero-c-card">
+              <p class="hero-lead hero-lead--c">A elevo desenvolve projetos estratégicos para estruturar o crescimento da sua empresa, abrir novas oportunidades e escalar o seu modelo de negócio. Do plano à execução, do seu lado.</p>
+              <div class="hero-ctas hero-ctas--c">
+                <a class="btn btn-hero btn-hero-primary" href="https://wa.me/5543991588212" target="_blank" rel="noopener noreferrer">
+                  Fale no WhatsApp <svg class="icon-fill"><use href="#i-whatsapp"/></svg>
+                </a>
+                <a class="btn btn-hero btn-hero-outline" href="#solucao">Conheça as soluções</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="hero-ab-toggle" id="heroAbToggle" type="button" aria-pressed="false" aria-label="Hero opção A. Clique para alternar.">A</button>
+      </div>
+
+      <div class="hero-logos reveal">
+        <p class="hero-logos-label">Empresas que elevaram o nível</p>
+        <ul aria-label="Principais clientes da elevo">
+          <li><img loading="lazy" src="./img/clientes/sebrae.png" alt="Sebrae" height="32"></li>
+          <li><img loading="lazy" src="./img/clientes/fortmobile.png" alt="Fortmobile" height="32"></li>
+          <li><img loading="lazy" src="./img/clientes/produsi.png" alt="Produsi Metalúrgica" height="32"></li>
+          <li><img loading="lazy" src="./img/clientes/london.png" alt="London" height="32"></li>
+          <li><img loading="lazy" src="./img/clientes/abstartups.png" alt="Abstartups" height="32"></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção 1 - Travando (o diagnóstico) -->
+  <section id="diagnostico" class="travando">
+    <div class="wrap">
+      <div class="travando-panel reveal">
+        <header class="travando-head">
+          <p class="eyebrow">O diagnóstico</p>
+          <h2>O que está travando o seu próximo nível?</h2>
+          <p class="lead">A sua empresa tem potencial, mas o crescimento empacou. Iniciativa que não gera retorno e operação abaixo do ponto mostram uma coisa: evoluir sem direção custa caro.</p>
+        </header>
+        <div class="pain-cloud" role="list" aria-label="Sinais comuns de travamento">
+          <div class="pain-cloud-row" role="presentation">
+            <a class="pain-chip reveal" style="--i:0" href="#frente-pessoas" role="listitem">Equipe que não performa</a>
+            <a class="pain-chip reveal" style="--i:1" href="#frente-negocio" role="listitem">Esforço sem resultado</a>
+            <a class="pain-chip reveal" style="--i:2" href="#frente-mercado" role="listitem">Reação tardia ao mercado</a>
+          </div>
+          <div class="pain-cloud-row" role="presentation">
+            <a class="pain-chip reveal" style="--i:3" href="#frente-pessoas" role="listitem">Rotinas desorganizadas</a>
+            <a class="pain-chip reveal" style="--i:4" href="#frente-negocio" role="listitem">Modelo de negócio ultrapassado</a>
+            <a class="pain-chip reveal" style="--i:5" href="#frente-pessoas" role="listitem">Liderança sem gestão</a>
+            <a class="pain-chip reveal" style="--i:6" href="#frente-mercado" role="listitem">Perda de competitividade</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção 2 - Solução (três frentes) -->
+  <section id="solucao" class="solucao">
+    <div class="wrap">
+      <header class="solucao-head reveal">
+        <p class="eyebrow">Como destravamos</p>
+        <h2>
+          <span class="solucao-headline-line">Três frentes,</span>
+          <span class="solucao-headline-line">um mesmo movimento</span>
+        </h2>
+      </header>
+
+      <div class="frentes-list">
+        <article class="frente-card reveal" id="frente-negocio" style="--i:0">
+          <p class="frente-cat">negócios</p>
+          <h3 class="frente-title">Transformar potencial<br>em resultado</h3>
+          <div class="frente-copy">
+            <p class="frente-body">Quando o modelo atual não sustenta mais o próximo nível, é hora de repensar como a sua empresa gera valor, cresce e se diferencia.</p>
+            <p class="frente-result">Você implanta novas formas de crescer, vender e competir.</p>
+            <button class="btn btn-ghost frente-cta" type="button" data-modal="modalNegocio">Descobrir <svg><use href="#i-arrow-right"/></svg></button>
+          </div>
+        </article>
+
+        <article class="frente-card reveal" id="frente-mercado" style="--i:1">
+          <p class="frente-cat">mercado</p>
+          <h3 class="frente-title">Encontrar a oportunidade<br>antes do concorrente</h3>
+          <div class="frente-copy">
+            <p class="frente-body">Exploramos tendências, comportamentos e movimentos competitivos para achar onde estão as próximas frentes de expansão.</p>
+            <p class="frente-result">Oportunidade vira venda e crescimento.</p>
+            <button class="btn btn-ghost frente-cta" type="button" data-modal="modalMercado">Descobrir <svg><use href="#i-arrow-right"/></svg></button>
+          </div>
+        </article>
+
+        <article class="frente-card reveal" id="frente-pessoas" style="--i:2">
+          <p class="frente-cat">pessoas</p>
+          <h3 class="frente-title">Desenvolver pessoas<br>para alta performance</h3>
+          <div class="frente-copy">
+            <p class="frente-body">Desenvolvemos liderança, estrutura e rotina para executar melhor e ter resultado consistente.</p>
+            <p class="frente-result">Você gera mais resultado com o mesmo time.</p>
+            <button class="btn btn-ghost frente-cta" type="button" data-modal="modalPessoas">Descobrir <svg><use href="#i-arrow-right"/></svg></button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção 3 - Como atuamos -->
+  <section id="atuamos" class="atuamos">
+    <div class="atuamos-layout">
+        <header class="atuamos-head reveal">
+          <p class="eyebrow">Como atuamos</p>
+          <h2>
+            <span class="atuamos-headline-line">Quatro formatos</span>
+            <span class="atuamos-headline-line">para destravar</span>
+            <span class="atuamos-headline-line">o crescimento</span>
+          </h2>
+        </header>
+
+        <div class="atuamos-stage reveal" aria-label="Formatos de atuação da elevo">
+        <button class="servico-bolha servico-bolha--projetos" type="button" data-modal="modalProjetos">
+          <span class="servico-bolha-label">Projetos estratégicos</span>
+        </button>
+        <button class="servico-bolha servico-bolha--modulos" type="button" data-modal="modalModulos">
+          <span class="servico-bolha-label">Módulos estratégicos</span>
+        </button>
+        <button class="servico-bolha servico-bolha--workshop" type="button" data-modal="modalWorkshop">
+          <span class="servico-bolha-label">Workshop</span>
+        </button>
+        <button class="servico-bolha servico-bolha--mentoria" type="button" data-modal="modalMentoria">
+          <span class="servico-bolha-label">Mentoria</span>
+        </button>
+        </div>
+    </div>
+  </section>
+
+  <!-- Seção 4 - Empresas / depoimentos -->
+  <section id="empresas" class="empresas">
+    <div class="wrap" data-depo-carousel>
+      <div class="empresas-head reveal">
+        <div class="empresas-head-copy">
+          <p class="eyebrow">Clientes</p>
+          <h2>Empresas que elevaram o nível</h2>
+        </div>
+        <div class="depo-nav-group" aria-label="Navegar depoimentos">
+          <button class="depo-nav depo-nav--prev" type="button" aria-label="Depoimento anterior">
+            <svg aria-hidden="true"><use href="#i-arrow-left"/></svg>
+          </button>
+          <button class="depo-nav depo-nav--next" type="button" aria-label="Próximo depoimento">
+            <svg aria-hidden="true"><use href="#i-arrow-right"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="depo-carousel reveal">
+        <div class="depo-carousel-viewport" aria-live="polite">
+          <div class="depo-carousel-track">
+            <figure class="depo-slide is-active">
+              <blockquote>
+                <p>&ldquo;A consultoria da elevo tem agregado qualidade, foco e assertividade na condução das melhores estratégias para duas das minhas empresas. Investimos a energia certa nos pontos com maior probabilidade de resultado. A partir de dados e organização, acrescentamos leveza e performance.&rdquo;</p>
+              </blockquote>
+              <figcaption>
+                <img class="depo-logo" loading="lazy" src="./img/clientes/london.png" alt="" width="120" height="34">
+                <div class="depo-meta">
+                  <span class="name">Karen Sinnema</span>
+                  <span class="role">London Marcas e Patentes</span>
+                </div>
+              </figcaption>
+            </figure>
+
+            <figure class="depo-slide">
+              <blockquote>
+                <p>&ldquo;Encerramos uma etapa importante de aperfeiçoamento das nossas práticas de gestão de pessoas. Reconhecemos a competência, a organização e a agilidade da elevo na condução de todas as entregas.&rdquo;</p>
+              </blockquote>
+              <figcaption>
+                <img class="depo-logo" loading="lazy" src="./img/clientes/produsi.png" alt="" width="120" height="34">
+                <div class="depo-meta">
+                  <span class="name">Henrique Tristão</span>
+                  <span class="role">Produsi Metalúrgica</span>
+                </div>
+              </figcaption>
+            </figure>
+
+            <figure class="depo-slide">
+              <blockquote>
+                <p>&ldquo;A gente tinha a cabeça voltada só para as redes sociais. A elevo trouxe uma visão mais ampla e estratégica para o negócio. Hoje entendemos que marketing vai além das redes: é definir quem é o nosso público, o que comunicar, onde ele está e como se relacionar com ele.&rdquo;</p>
+              </blockquote>
+              <figcaption>
+                <img class="depo-logo" loading="lazy" src="./img/clientes/fortmobile.png" alt="" width="120" height="34">
+                <div class="depo-meta">
+                  <span class="name">Guilherme Bittencourt</span>
+                  <span class="role">Fortmobile</span>
+                </div>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="logo-marquee reveal" aria-label="Logos de clientes da elevo">
+      <div class="logo-track">
+        <ul class="logo-set">
+          <li><img loading="lazy" src="./img/clientes/sebrae.png" alt="Sebrae" height="34"></li>
+          <li><img loading="lazy" src="./img/clientes/fortmobile.png" alt="Fortmobile" height="34"></li>
+          <li><img loading="lazy" src="./img/clientes/produsi.png" alt="Produsi Metalúrgica" height="34"></li>
+          <li><img loading="lazy" src="./img/clientes/london.png" alt="London" height="34"></li>
+          <li><img loading="lazy" src="./img/clientes/abstartups.png" alt="Abstartups" height="34"></li>
+          <li><img loading="lazy" src="./img/clientes/moblee.svg" alt="Moblee" height="34"></li>
+          <li><img loading="lazy" src="./img/clientes/volpe.png" alt="Volpe" height="34"></li>
+          <li><img loading="lazy" src="./img/clientes/vexsoft.png" alt="Vexsoft" height="34"></li>
+          <li><img loading="lazy" src="./img/clientes/fahl-center.png" alt="Fahl Center" height="34"></li>
+          <li><img loading="lazy" src="./img/clientes/agnus.png" alt="Agnus Operador Logístico" height="34"></li>
+          <li><img loading="lazy" src="./img/clientes/labor.png" alt="Labor Trabalho Temporário" height="34"></li>
+          <li><img loading="lazy" src="./img/clientes/codie.png" alt="Codie" height="34"></li>
+        </ul>
+        <ul class="logo-set" aria-hidden="true">
+          <li><img loading="lazy" src="./img/clientes/sebrae.png" alt="" height="34"></li>
+          <li><img loading="lazy" src="./img/clientes/fortmobile.png" alt="" height="34"></li>
+          <li><img loading="lazy" src="./img/clientes/produsi.png" alt="" height="34"></li>
+          <li><img loading="lazy" src="./img/clientes/london.png" alt="" height="34"></li>
+          <li><img loading="lazy" src="./img/clientes/abstartups.png" alt="" height="34"></li>
+          <li><img loading="lazy" src="./img/clientes/moblee.svg" alt="" height="34"></li>
+          <li><img loading="lazy" src="./img/clientes/volpe.png" alt="" height="34"></li>
+          <li><img loading="lazy" src="./img/clientes/vexsoft.png" alt="" height="34"></li>
+          <li><img loading="lazy" src="./img/clientes/fahl-center.png" alt="" height="34"></li>
+          <li><img loading="lazy" src="./img/clientes/agnus.png" alt="" height="34"></li>
+          <li><img loading="lazy" src="./img/clientes/labor.png" alt="" height="34"></li>
+          <li><img loading="lazy" src="./img/clientes/codie.png" alt="" height="34"></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção 5 - Resultados (o que fica) -->
+  <section id="resultados" class="resultados">
+    <div class="wrap">
+      <header class="resultados-head reveal">
+        <div class="resultados-head-copy">
+          <p class="eyebrow">O que fica</p>
+          <h2>
+            <span class="resultados-headline-line">Não entregamos projeto</span>
+            <span class="resultados-headline-line">para ficar na gaveta</span>
+          </h2>
+        </div>
+        <a class="btn btn-primary resultados-cta" href="https://wa.me/5543991588212" target="_blank" rel="noopener noreferrer">Fale no WhatsApp <svg class="icon-fill"><use href="#i-whatsapp"/></svg></a>
+      </header>
+
+      <div class="bento-grid reveal">
+        <article class="bento-card bento-card--stat bento-card--dark" style="--i:0">
+          <p class="bento-stat"><span class="bento-stat-num stat-ticker" data-count="20" data-suffix="%">20%</span></p>
+          <p class="bento-stat-label">de aumento em leads qualificados</p>
+        </article>
+
+        <article class="bento-card bento-card--visual" style="--i:1">
+          <img loading="lazy" src="./img/hero/hero-workshop.jpg" alt="Equipe em sessão estratégica com a elevo">
+        </article>
+
+        <article class="bento-card bento-card--stat bento-card--dark" style="--i:2">
+          <p class="bento-stat"><span class="bento-stat-num stat-ticker" data-count="3" data-suffix="x">3x</span></p>
+          <p class="bento-stat-label">mais ritmo na execução estratégica</p>
+        </article>
+
+        <article class="bento-card bento-card--copy" style="--i:3">
+          <p>Mais <strong>clareza</strong> sobre onde crescer, projeto <strong>prático</strong> que gera resultado, equipe mais <strong>produtiva</strong>, <strong>posicionamento</strong> mais forte, nova <strong>frente de receita</strong> e mais capacidade de <strong>execução</strong> — com acompanhamento até a evolução acontecer na prática.</p>
+        </article>
+
+        <article class="bento-card bento-card--brand" style="--i:4" aria-hidden="true">
+          <div class="bento-brand-field"></div>
+          <img class="bento-brand-mark" src="./img/brand/elevo-simbolo-branco.svg" alt="" width="120" height="120">
+        </article>
+
+        <article class="bento-card bento-card--stat bento-card--dark" style="--i:5">
+          <p class="bento-stat"><span class="bento-stat-num stat-ticker" data-count="12" data-suffix="+">12+</span></p>
+          <p class="bento-stat-label">anos estruturando crescimento real</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção 6 - Como um projeto acontece (o método) -->
+  <section id="metodo" class="metodo">
+    <div class="wrap">
+      <div class="metodo-intro reveal">
+        <header class="metodo-head">
+          <p class="eyebrow">O método</p>
+          <h2>
+            <span class="metodo-headline-line">Como um</span>
+            <span class="metodo-headline-line">projeto acontece</span>
+          </h2>
+          <a class="btn btn-primary" href="https://wa.me/5543991588212" target="_blank" rel="noopener noreferrer">Quero um orçamento no WhatsApp <svg class="icon-fill"><use href="#i-whatsapp"/></svg></a>
+        </header>
+
+        <div class="metodo-tools-stage" aria-label="Ferramentas utilizadas">
+          <span class="tool-bolha tool-bolha--dt">Design thinking</span>
+          <span class="tool-bolha tool-bolha--okrs">OKRs</span>
+          <span class="tool-bolha tool-bolha--canvas">Canvas</span>
+          <span class="tool-bolha tool-bolha--kanban">Kanban</span>
+          <span class="tool-bolha tool-bolha--scrum">Scrum</span>
+          <span class="tool-bolha tool-bolha--sprint">Design sprint</span>
+          <span class="tool-bolha tool-bolha--squads">Squads</span>
+          <span class="tool-bolha tool-bolha--smart">SMART</span>
+        </div>
+      </div>
+
+      <ol class="etapas-escadinha reveal">
+        <li class="etapa-step" style="--i:0">
+          <p class="etapa-label">Etapa 01 · Pensar</p>
+          <h3>Entendemos o momento da empresa</h3>
+          <p>Mapeamos desafio, oportunidade e prioridade para destravar o próximo nível.</p>
+        </li>
+        <li class="etapa-step" style="--i:1">
+          <p class="etapa-label">Etapa 02 · Decidir</p>
+          <h3>Estruturamos o caminho</h3>
+          <p>Transformamos informação em direcionamento estratégico e escolha clara.</p>
+        </li>
+        <li class="etapa-step" style="--i:2">
+          <p class="etapa-label">Etapa 03 · Agir</p>
+          <h3>Construímos junto</h3>
+          <p>Desenvolvemos cada frente com quem vai executar. Mudança que não passa pela equipe não dura.</p>
+        </li>
+        <li class="etapa-step" style="--i:3">
+          <p class="etapa-label">Etapa 04 · Evoluir</p>
+          <h3>Acompanhamos e ajustamos</h3>
+          <p>Transformamos plano em ação prática e sustentamos o ritmo até o resultado aparecer.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Seção 7 - Sobre a elevo -->
+  <section id="sobre" class="sobre" data-theme="dark">
+    <div class="wrap">
+      <div class="sobre-grid">
+        <div class="reveal">
+          <p class="eyebrow">A elevo</p>
+          <h2>Existimos para levar a sua empresa ao próximo nível</h2>
+        </div>
+        <div class="sobre-body reveal">
+          <p>A elevo trabalha com organizações que já conquistaram espaço no mercado, mas perceberam que continuar fazendo mais do mesmo não leva ao futuro que elas querem.</p>
+          <p>Destravamos o potencial da sua empresa estruturando como ela pensa, decide e executa. A inteligência do negócio é sua; nós ativamos e damos forma a ela.</p>
+          <p>Ficamos do seu lado para garantir que a mudança aconteça na prática e vire resultado real.</p>
+        </div>
+      </div>
+
+      <ul class="numeros">
+        <li class="reveal" style="--i:0">
+          <span class="numero stat-ticker" data-count="12" data-suffix="+">12+</span>
+          <span class="numero-label">anos de mercado</span>
+        </li>
+        <li class="reveal" style="--i:1">
+          <span class="numero stat-ticker" data-count="200" data-prefix="+">+200</span>
+          <span class="numero-label">empresas atendidas</span>
+        </li>
+        <li class="reveal" style="--i:2">
+          <span class="numero">BR +</span>
+          <span class="numero-label">alcance nacional e internacional</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Seção 8 - Executivos -->
+  <section id="executivos" class="executivos">
+    <div class="wrap">
+      <div class="executivos-layout">
+        <div class="executivos-head reveal">
+          <p class="eyebrow">Quem conduz</p>
+          <h2>Os executivos<br>por trás<br>dos projetos</h2>
+        </div>
+
+        <div class="executivos-grid">
+        <figure class="exec-card reveal" style="--i:0">
+          <div class="exec-photo">
+            <img loading="lazy" src="./img/exec-jessica.jpg" alt="Retrato de Jéssica Fahl em preto e branco" width="720" height="982">
+          </div>
+          <figcaption>
+            <h3>Jéssica Fahl</h3>
+            <p>Executiva de inovação, à frente dos negócios</p>
+            <a href="https://www.linkedin.com/in/jessicafahl/" target="_blank" rel="noopener noreferrer">LinkedIn <svg><use href="#i-arrow-right"/></svg></a>
+          </figcaption>
+        </figure>
+
+        <figure class="exec-card reveal" style="--i:1">
+          <div class="exec-photo">
+            <img loading="lazy" src="./img/exec-guilherme.jpg" alt="Retrato de Guilherme Silva em preto e branco" width="720" height="982">
+          </div>
+          <figcaption>
+            <h3>Guilherme Silva</h3>
+            <p>Executivo de inovação, à frente de performance e pessoas</p>
+            <a href="https://www.linkedin.com/in/guilherme-silva-9b361989/" target="_blank" rel="noopener noreferrer">LinkedIn <svg><use href="#i-arrow-right"/></svg></a>
+          </figcaption>
+        </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção 9 - Na mídia -->
+  <section id="midia" class="midia">
+    <div class="wrap" data-midia-carousel>
+      <div class="midia-head reveal">
+        <div class="midia-head-copy">
+          <p class="eyebrow">Imprensa</p>
+          <h2>A elevo na mídia</h2>
+          <p class="lead">O que a elevo tem dito sobre estratégia, mercado e o futuro dos negócios.</p>
+        </div>
+        <div class="midia-nav-group" aria-label="Navegar matérias">
+          <button class="midia-nav midia-nav--prev" type="button" aria-label="Matéria anterior">
+            <svg aria-hidden="true"><use href="#i-arrow-left"/></svg>
+          </button>
+          <button class="midia-nav midia-nav--next" type="button" aria-label="Próxima matéria">
+            <svg aria-hidden="true"><use href="#i-arrow-right"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="midia-carousel reveal">
+        <div class="midia-carousel-viewport" aria-live="polite">
+          <div class="midia-carousel-track">
+            <!-- Matérias reais do clipping assets/midia/CLIPPING ASSESSORIA IMPRENSA.xlsx -->
+            <a class="midia-slide is-active" href="https://www.folhadelondrina.com.br/" target="_blank" rel="noopener noreferrer">
+              <div class="midia-slide-brand">
+                <img loading="lazy" src="./img/midia/folha-de-londrina.png" alt="Folha de Londrina" width="280" height="88">
+              </div>
+              <h3>&ldquo;Dez caminhos da inovação&rdquo;</h3>
+              <span class="midia-ler">Ler matéria <svg aria-hidden="true"><use href="#i-arrow-right"/></svg></span>
+            </a>
+            <a class="midia-slide" href="https://www.segs.com.br/" target="_blank" rel="noopener noreferrer" aria-hidden="true">
+              <div class="midia-slide-brand">
+                <img loading="lazy" src="./img/midia/segs.png" alt="SEGS" width="280" height="88">
+              </div>
+              <h3>&ldquo;Negócios competitivos dependem da inovação&rdquo;</h3>
+              <span class="midia-ler">Ler matéria <svg aria-hidden="true"><use href="#i-arrow-right"/></svg></span>
+            </a>
+            <a class="midia-slide" href="https://overbr.com.br/artigos/visao-de-futuro-demanda-solucoes-voltadas-a-inovacao-estrategica" target="_blank" rel="noopener noreferrer" aria-hidden="true">
+              <div class="midia-slide-brand">
+                <img loading="lazy" src="./img/midia/overbr.png" alt="OverBR" width="280" height="88">
+              </div>
+              <h3>&ldquo;Visão de futuro demanda soluções voltadas à inovação estratégica&rdquo;</h3>
+              <span class="midia-ler">Ler matéria <svg aria-hidden="true"><use href="#i-arrow-right"/></svg></span>
+            </a>
+            <a class="midia-slide" href="https://londrix.com.br/" target="_blank" rel="noopener noreferrer" aria-hidden="true">
+              <div class="midia-slide-brand">
+                <img loading="lazy" src="./assets/midia/Londrix-300x91-1.png" alt="Londrix" width="300" height="91">
+              </div>
+              <h3>&ldquo;Pistache em alta gera oportunidades de ouro para pequenos negócios&rdquo;</h3>
+              <span class="midia-ler">Ler matéria <svg aria-hidden="true"><use href="#i-arrow-right"/></svg></span>
+            </a>
+            <a class="midia-slide" href="https://novovarejo.com.br/" target="_blank" rel="noopener noreferrer" aria-hidden="true">
+              <div class="midia-slide-brand">
+                <img loading="lazy" src="./assets/midia/novovarejo2022_logo.jpg" alt="Novo Varejo" width="280" height="88">
+              </div>
+              <h3>&ldquo;Alta do uso de apps para compras no supermercado possibilita ofertas personalizadas&rdquo;</h3>
+              <span class="midia-ler">Ler matéria <svg aria-hidden="true"><use href="#i-arrow-right"/></svg></span>
+            </a>
+            <a class="midia-slide" href="https://assets.jornalempresasenegocios.com.br/uploads/2026/06/pagina_03_ed_5607.pdf" target="_blank" rel="noopener noreferrer" aria-hidden="true">
+              <div class="midia-slide-brand">
+                <img loading="lazy" src="./assets/midia/LOGO_Empresasenegocios.png" alt="Jornal Empresas e Negócios" width="280" height="88">
+              </div>
+              <h3>&ldquo;Pleno emprego: problemas e desafios a serem enfrentados&rdquo;</h3>
+              <span class="midia-ler">Ler matéria <svg aria-hidden="true"><use href="#i-arrow-right"/></svg></span>
+            </a>
+            <a class="midia-slide" href="https://www.youtube.com/live/GG2ydqj8CQo" target="_blank" rel="noopener noreferrer" aria-hidden="true">
+              <div class="midia-slide-brand">
+                <img loading="lazy" src="./assets/midia/Logotipo_da_TV_Fronteira.png" alt="TV Fronteira" width="280" height="88">
+              </div>
+              <h3>&ldquo;Compras em apps: como a prática beneficia clientes e empreendedores&rdquo;</h3>
+              <span class="midia-ler">Assistir matéria <svg aria-hidden="true"><use href="#i-arrow-right"/></svg></span>
+            </a>
+            <a class="midia-slide" href="https://taroba.com.br/vitrine-revista-londrina/entenda-a-polemica-da-nova-camisa-da-selecao-brasileira" target="_blank" rel="noopener noreferrer" aria-hidden="true">
+              <div class="midia-slide-brand">
+                <img loading="lazy" src="./assets/midia/taroba.png" alt="TV Tarobá" width="280" height="88">
+              </div>
+              <h3>&ldquo;Entenda a polêmica da nova camisa da seleção brasileira&rdquo;</h3>
+              <span class="midia-ler">Ler matéria <svg aria-hidden="true"><use href="#i-arrow-right"/></svg></span>
+            </a>
+            <a class="midia-slide" href="https://www.showvip.com.br/" target="_blank" rel="noopener noreferrer" aria-hidden="true">
+              <div class="midia-slide-brand">
+                <img loading="lazy" src="./assets/midia/Logo-show-vip.png" alt="Show VIP" width="280" height="88">
+              </div>
+              <h3>&ldquo;Pistache: estratégias multicanais de marketing transformam tendências em consumo&rdquo;</h3>
+              <span class="midia-ler">Ler matéria <svg aria-hidden="true"><use href="#i-arrow-right"/></svg></span>
+            </a>
+            <a class="midia-slide" href="https://samaisvarejo.com.br/" target="_blank" rel="noopener noreferrer" aria-hidden="true">
+              <div class="midia-slide-brand">
+                <img loading="lazy" src="./assets/midia/samaisvarejo.png" alt="Samais Varejo" width="280" height="88">
+              </div>
+              <h3>&ldquo;Geração Z e Baby Boomers lideram retração no consumo de bebidas alcoólicas fora do lar&rdquo;</h3>
+              <span class="midia-ler">Ler matéria <svg aria-hidden="true"><use href="#i-arrow-right"/></svg></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção 11 - Conteúdos (blog fora de escopo: empty state, sem posts inventados) -->
+  <section id="conteudos" class="conteudos">
+    <div class="wrap">
+      <div class="conteudos-grid reveal">
+        <div>
+          <p class="eyebrow">Conteúdos</p>
+          <h2>Ideias para pensar o próximo nível</h2>
+          <p class="lead">Textos curtos sobre estratégia, crescimento e execução.</p>
+        </div>
+        <!-- Posts de exemplo: trocar por conteúdo real quando o blog for aprovado -->
+        <div class="post-grid">
+          <a class="post-card" href="#conteudos">
+            <span class="post-cover">
+              <img loading="lazy" src="./img/post-estrategia.jpg" alt="" width="800" height="500">
+              <span class="photo-tint" aria-hidden="true"></span>
+            </span>
+            <span class="post-body">
+              <span class="post-categoria">Estratégia</span>
+              <h3>O que separa esforço de direção no crescimento</h3>
+              <svg class="post-arrow"><use href="#i-arrow-right"/></svg>
+            </span>
+          </a>
+          <a class="post-card" href="#conteudos">
+            <span class="post-cover">
+              <img loading="lazy" src="./img/post-execucao.jpg" alt="" width="800" height="500">
+              <span class="photo-tint" aria-hidden="true"></span>
+            </span>
+            <span class="post-body">
+              <span class="post-categoria">Execução</span>
+              <h3>Como tirar o plano do papel e sustentar o ritmo</h3>
+              <svg class="post-arrow"><use href="#i-arrow-right"/></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-shell">
+    <div class="footer-panel">
+      <svg class="footer-panel-shape footer-panel-shape--desktop" viewBox="0 0 1295 402" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M1295 294C1295 302.837 1287.84 310 1279 310H1126.56C1121.59 310 1116.91 312.309 1113.88 316.249L1052.77 395.751C1049.74 399.691 1045.05 402 1040.08 402H16C7.16341 402 0 394.837 0 386V16C0 7.16345 7.16344 0 16 0H1279C1287.84 0 1295 7.16344 1295 16V294Z" fill="#2F1533"/>
+      </svg>
+      <svg class="footer-panel-shape footer-panel-shape--mobile" viewBox="0 0 343 957" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M343 941C343 949.837 335.837 957 327 957H16C7.16345 957 0 949.837 0 941V16C0 7.16345 7.16344 0 16 0H327C335.837 0 343 7.16344 343 16V941Z" fill="#2F1533"/>
+      </svg>
+
+      <div class="footer-top">
+        <div class="footer-cta reveal">
+          <h2><span class="footer-cta-line">Não fazer nada</span><span class="footer-cta-line">não é uma opção.</span></h2>
+          <div class="footer-cta-actions">
+            <a class="btn btn-primary" href="https://wa.me/5543991588212" target="_blank" rel="noopener noreferrer">Contratar no WhatsApp <svg class="icon-fill"><use href="#i-whatsapp"/></svg></a>
+            <!-- TODO: URL do Google Agenda a confirmar (ver CLAUDE.md) -->
+            <a class="btn btn-secondary btn-on-dark" href="#" aria-disabled="true" data-agenda-pendente>Google Agenda <svg aria-hidden="true"><use href="#i-calendar"/></svg></a>
+          </div>
+        </div>
+        <nav class="footer-nav reveal" aria-label="Navegação do rodapé">
+          <div class="footer-nav-social">
+            <p class="footer-label">Siga a elevo</p>
+            <div class="social-row">
+              <a class="social-link" href="#" aria-disabled="true" aria-label="Instagram da elevo"><svg class="icon-fill"><use href="#i-instagram"/></svg></a>
+              <a class="social-link" href="#" aria-disabled="true" aria-label="Facebook da elevo"><svg class="icon-fill"><use href="#i-facebook"/></svg></a>
+              <a class="social-link" href="#" aria-disabled="true" aria-label="LinkedIn da elevo"><svg class="icon-fill"><use href="#i-linkedin"/></svg></a>
+            </div>
+          </div>
+          <div class="footer-nav-links">
+            <a href="#top">início</a>
+            <a href="#sobre">a elevo</a>
+            <a href="#executivos">executivos</a>
+            <a href="#solucao">solução</a>
+            <a href="#midia">na mídia</a>
+            <a href="#conteudos">conteúdos</a>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <div class="footer-band">
+      <svg class="footer-shape footer-shape--desktop" viewBox="0 0 1295 360" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M1295 344C1295 352.837 1287.84 360 1279 360H16C7.16344 360 0 352.837 0 344V110C0 101.163 7.16344 94 16 94H1064.22C1069.25 94 1073.99 91.6293 1077.02 87.6009L1137.93 6.39907C1140.95 2.37072 1145.69 0 1150.73 0H1279C1287.84 0 1295 7.16344 1295 16V344Z" fill="url(#footerGradDesktop)"/>
+        <defs>
+          <linearGradient id="footerGradDesktop" x1="171.597" y1="-141.32" x2="170.5" y2="359.998" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#B882E8"/>
+            <stop offset="1" stop-color="#FF4817"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <svg class="footer-shape footer-shape--mobile" viewBox="0 0 343 813" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M343 797C343 805.837 335.837 813 327 813H185.454C177.585 813 170.884 807.278 169.651 799.506L152.049 688.494C150.817 680.722 144.116 675 136.246 675H16C7.16345 675 0 667.837 0 659V16C0 7.16344 7.16344 0 16 0H327C335.837 0 343 7.16344 343 16V797Z" fill="url(#footerGradMobile)"/>
+        <defs>
+          <linearGradient id="footerGradMobile" x1="45.4501" y1="-200.781" x2="28.508" y2="812.717" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#B882E8"/>
+            <stop offset="1" stop-color="#FF4817"/>
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <a class="footer-top-btn" href="#top" aria-label="Voltar ao início">
+        <svg><use href="#i-arrow-up"/></svg>
+      </a>
+
+      <div class="footer-legal">
+        <img class="footer-logo" src="./img/brand/elevo-logo-roxo.svg" alt="elevo" width="196" height="46">
+        <div class="footer-legal-right">
+          <div class="footer-legal-links">
+            <!-- TODO: páginas de políticas a criar -->
+            <a href="#" aria-disabled="true">Política de privacidade</a>
+            <a href="#" aria-disabled="true">Termos de uso</a>
+            <a href="#" aria-disabled="true">Cookies</a>
+            <a class="footer-agency" href="https://londrinasa.com.br" target="_blank" rel="noopener noreferrer" aria-label="LDNA S/A Agência Digital">
+              <img src="./img/brand/logo-agency.svg" alt="LDNA S/A Agência Digital" width="84" height="23">
+            </a>
+          </div>
+          <div class="footer-legal-meta">
+            <p>© 2026 elevo. Todos os direitos reservados. Londrina/PR</p>
+            <div class="footer-legal-contato">
+              <a href="https://wa.me/5543991588212" target="_blank" rel="noopener noreferrer">WhatsApp (43) 99158-8212</a>
+              <a href="mailto:contato@elevobr.com.br">contato@elevobr.com.br</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Modais das frentes (conteúdo dos labs: base do planejamento, a confirmar com o cliente) -->
+<dialog class="frente-modal" id="modalNegocio" aria-labelledby="modalNegocioTitle">
+  <div class="modal-inner">
+    <button class="modal-close" type="button" data-close aria-label="Fechar detalhe da frente"><svg><use href="#i-x"/></svg></button>
+    <p class="eyebrow">Negócio</p>
+    <h3 id="modalNegocioTitle">Transformar potencial em resultado</h3>
+    <p class="modal-intro">Quando o modelo atual não sustenta mais o próximo nível, é hora de repensar como a sua empresa gera valor, cresce e se diferencia.</p>
+    <h4>Sinais de que você precisa disso</h4>
+    <ul class="modal-chips">
+      <li>Esforço sem resultado</li>
+      <li>Modelo de negócio ultrapassado</li>
+    </ul>
+    <h4>O que fazemos nessa frente</h4>
+    <ul class="modal-labs">
+      <li><strong>Negócio Lab</strong> diagnóstico e modelagem estratégica</li>
+      <li><strong>Produto Lab</strong> oferta e valor</li>
+      <li><strong>Posiciona Lab</strong> diferenciação e marca</li>
+    </ul>
+    <h4>O resultado</h4>
+    <p class="frente-result">Você implanta novas formas de crescer, vender e competir.</p>
+    <a class="btn btn-primary" href="https://wa.me/5543991588212" target="_blank" rel="noopener noreferrer">Conversar no WhatsApp <svg class="icon-fill"><use href="#i-whatsapp"/></svg></a>
+  </div>
+</dialog>
+
+<dialog class="frente-modal" id="modalMercado" aria-labelledby="modalMercadoTitle">
+  <div class="modal-inner">
+    <button class="modal-close" type="button" data-close aria-label="Fechar detalhe da frente"><svg><use href="#i-x"/></svg></button>
+    <p class="eyebrow">Mercado</p>
+    <h3 id="modalMercadoTitle">Encontrar a oportunidade antes do concorrente</h3>
+    <p class="modal-intro">Exploramos tendências, comportamentos e movimentos competitivos para achar onde estão as próximas frentes de expansão.</p>
+    <h4>Sinais de que você precisa disso</h4>
+    <ul class="modal-chips">
+      <li>Reação tardia ao mercado</li>
+      <li>Perda de competitividade</li>
+    </ul>
+    <h4>O que fazemos nessa frente</h4>
+    <ul class="modal-labs">
+      <li><strong>Persona Lab</strong> público e conexão</li>
+      <li><strong>Tendências Lab</strong> cenário e inovação</li>
+    </ul>
+    <h4>O resultado</h4>
+    <p class="frente-result">Oportunidade vira venda e crescimento.</p>
+    <a class="btn btn-primary" href="https://wa.me/5543991588212" target="_blank" rel="noopener noreferrer">Conversar no WhatsApp <svg class="icon-fill"><use href="#i-whatsapp"/></svg></a>
+  </div>
+</dialog>
+
+<dialog class="frente-modal" id="modalPessoas" aria-labelledby="modalPessoasTitle">
+  <div class="modal-inner">
+    <button class="modal-close" type="button" data-close aria-label="Fechar detalhe da frente"><svg><use href="#i-x"/></svg></button>
+    <p class="eyebrow">Pessoas</p>
+    <h3 id="modalPessoasTitle">Desenvolver pessoas para alta performance</h3>
+    <p class="modal-intro">Desenvolvemos liderança, estrutura e rotina para executar melhor e ter resultado consistente.</p>
+    <h4>Sinais de que você precisa disso</h4>
+    <ul class="modal-chips">
+      <li>Equipe que não performa</li>
+      <li>Rotinas desorganizadas</li>
+      <li>Liderança sem gestão</li>
+    </ul>
+    <h4>O que fazemos nessa frente</h4>
+    <ul class="modal-labs">
+      <li><strong>Liderança Lab</strong> gestão e pessoas</li>
+      <li><strong>Cultura Lab</strong> comportamento e ambiente</li>
+      <li><strong>Performa Lab</strong> eficiência e foco</li>
+    </ul>
+    <h4>O resultado</h4>
+    <p class="frente-result">Você gera mais resultado com o mesmo time.</p>
+    <a class="btn btn-primary" href="https://wa.me/5543991588212" target="_blank" rel="noopener noreferrer">Conversar no WhatsApp <svg class="icon-fill"><use href="#i-whatsapp"/></svg></a>
+  </div>
+</dialog>
+
+<!-- Modais dos formatos de atuação -->
+<dialog class="frente-modal" id="modalProjetos" aria-labelledby="modalProjetosTitle">
+  <div class="modal-inner">
+    <button class="modal-close" type="button" data-close aria-label="Fechar detalhe do formato"><svg><use href="#i-x"/></svg></button>
+    <p class="eyebrow">Acelerar</p>
+    <h3 id="modalProjetosTitle">Projetos estratégicos</h3>
+    <p class="modal-intro">Construímos novas frentes a partir dos desafios reais do negócio, com direção, prioridade e execução do seu lado.</p>
+    <h4>Quando faz sentido</h4>
+    <ul class="modal-chips">
+      <li>Crescimento travado</li>
+      <li>Nova frente de receita</li>
+      <li>Modelo que precisa evoluir</li>
+    </ul>
+    <h4>O que você leva</h4>
+    <ul class="modal-labs">
+      <li><strong>Direção</strong> prioridades e plano de execução</li>
+      <li><strong>Estrutura</strong> ritmo, governança e entregas</li>
+      <li><strong>Resultado</strong> frentes implantadas no negócio</li>
+    </ul>
+    <a class="btn btn-primary" href="https://wa.me/5543991588212" target="_blank" rel="noopener noreferrer">Conversar no WhatsApp <svg class="icon-fill"><use href="#i-whatsapp"/></svg></a>
+  </div>
+</dialog>
+
+<dialog class="frente-modal" id="modalModulos" aria-labelledby="modalModulosTitle">
+  <div class="modal-inner">
+    <button class="modal-close" type="button" data-close aria-label="Fechar detalhe do formato"><svg><use href="#i-x"/></svg></button>
+    <p class="eyebrow">Descobrir</p>
+    <h3 id="modalModulosTitle">Módulos estratégicos</h3>
+    <p class="modal-intro">Revelamos caminhos, riscos e oportunidades antes de avançar, para decidir com mais clareza e menos desperdício.</p>
+    <h4>Quando faz sentido</h4>
+    <ul class="modal-chips">
+      <li>Decisão estratégica em aberto</li>
+      <li>Mercado em mudança</li>
+      <li>Prioridade ainda difusa</li>
+    </ul>
+    <h4>O que você leva</h4>
+    <ul class="modal-labs">
+      <li><strong>Diagnóstico</strong> leitura objetiva do momento</li>
+      <li><strong>Cenários</strong> caminhos e trade-offs mapeados</li>
+      <li><strong>Decisão</strong> próximo passo com critério</li>
+    </ul>
+    <a class="btn btn-primary" href="https://wa.me/5543991588212" target="_blank" rel="noopener noreferrer">Conversar no WhatsApp <svg class="icon-fill"><use href="#i-whatsapp"/></svg></a>
+  </div>
+</dialog>
+
+<dialog class="frente-modal" id="modalWorkshop" aria-labelledby="modalWorkshopTitle">
+  <div class="modal-inner">
+    <button class="modal-close" type="button" data-close aria-label="Fechar detalhe do formato"><svg><use href="#i-x"/></svg></button>
+    <p class="eyebrow">Despertar</p>
+    <h3 id="modalWorkshopTitle">Workshop</h3>
+    <p class="modal-intro">Ativamos novas formas de pensar e agir no time com dinâmicas práticas, alinhamento e energia para sair da sala e executar.</p>
+    <h4>Quando faz sentido</h4>
+    <ul class="modal-chips">
+      <li>Time desalinhado</li>
+      <li>Tema urgente para destravar</li>
+      <li>Capacitação em formato intensivo</li>
+    </ul>
+    <h4>O que você leva</h4>
+    <ul class="modal-labs">
+      <li><strong>Clareza</strong> entendimento compartilhado do desafio</li>
+      <li><strong>Método</strong> ferramentas aplicáveis no dia a dia</li>
+      <li><strong>Movimento</strong> compromissos e primeiros passos</li>
+    </ul>
+    <a class="btn btn-primary" href="https://wa.me/5543991588212" target="_blank" rel="noopener noreferrer">Conversar no WhatsApp <svg class="icon-fill"><use href="#i-whatsapp"/></svg></a>
+  </div>
+</dialog>
+
+<dialog class="frente-modal" id="modalMentoria" aria-labelledby="modalMentoriaTitle">
+  <div class="modal-inner">
+    <button class="modal-close" type="button" data-close aria-label="Fechar detalhe do formato"><svg><use href="#i-x"/></svg></button>
+    <p class="eyebrow">Elevar</p>
+    <h3 id="modalMentoriaTitle">Mentoria</h3>
+    <p class="modal-intro">Mantemos o negócio em movimento com foco, ritmo e direção, acompanhando decisões e execução ao longo do tempo.</p>
+    <h4>Quando faz sentido</h4>
+    <ul class="modal-chips">
+      <li>Plano já definido</li>
+      <li>Liderança precisa de suporte contínuo</li>
+      <li>Execução que não pode perder ritmo</li>
+    </ul>
+    <h4>O que você leva</h4>
+    <ul class="modal-labs">
+      <li><strong>Ritmo</strong> cadência e prioridades sustentadas</li>
+      <li><strong>Apoio</strong> decisões com quem já trilhou o caminho</li>
+      <li><strong>Consistência</strong> evolução que não depende de impulso</li>
+    </ul>
+    <a class="btn btn-primary" href="https://wa.me/5543991588212" target="_blank" rel="noopener noreferrer">Conversar no WhatsApp <svg class="icon-fill"><use href="#i-whatsapp"/></svg></a>
+  </div>
+</dialog>
+
+<!-- atalho discreto p/ voltar à v1 no mesmo deploy -->
+<a class="ver-switch" href="./index.html" title="Abrir versão 1 (principal)">v1</a>
+
+<script src="./js/main.js"></script>
+</body>
+</html>
