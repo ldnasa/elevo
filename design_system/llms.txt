@@ -12,6 +12,7 @@ from `tokens.css`; do not invent visual values.
 - [Color](specs/foundations/color.md): palette, role-swap contrast, and color usage rules
 - [Typography](specs/foundations/typography.md): single-family type roles and the 100/40/30/20 scale
 - [Shape](specs/foundations/shape.md): the signature cut-corner system - what gets cut, what never does
+- [Notch corner](specs/foundations/notch-corner.md): CSS recipe for the soft inverted-corner tab (radial-gradient fillets, aspect-safe)
 - [Spacing](specs/foundations/spacing.md): 8px component scale + brand ÷16 grid module
 - [Components](specs/components-index.md): component specs available in this system
 - [Patterns](specs/patterns-index.md): section rhythm and responsive grid rules

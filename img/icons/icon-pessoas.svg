@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+  <!-- Pessoas · malva — liderança + time sob o mesmo acordo -->
+  <circle cx="32" cy="15" r="7" fill="#b882e8"/>
+  <path fill="#b882e8" d="M18 35.5C18 29.7 24 25 32 25s14 4.7 14 10.5V44c0 2.2-1.8 4-4 4H22c-2.2 0-4-1.8-4-4v-8.5z"/>
+  <circle cx="13" cy="22" r="5.2" fill="#b882e8"/>
+  <path fill="#b882e8" d="M3 39c0-4 4-7 10-7s10 3 10 7v5c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2v-5z"/>
+  <circle cx="51" cy="22" r="5.2" fill="#b882e8"/>
+  <path fill="#b882e8" d="M41 39c0-4 4-7 10-7s10 3 10 7v5c0 1.1-.9 2-2 2H43c-1.1 0-2-.9-2-2v-5z"/>
+  <!-- barra de acordo / rotina compartilhada -->
+  <rect x="8" y="52" width="48" height="4" rx="2" fill="#b882e8"/>
+  <rect x="18" y="48" width="3.5" height="6" rx="1" fill="#b882e8"/>
+  <rect x="30.25" y="46" width="3.5" height="8" rx="1" fill="#b882e8"/>
+  <rect x="42.5" y="48" width="3.5" height="6" rx="1" fill="#b882e8"/>
+</svg>
