@@ -1,3 +1,4 @@
-<svg width="343" height="754" overflow="visible" style="display: block;" viewBox="0 0 343 754" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path id="Subtract" d="M311 0C328.673 0 343 14.3269 343 32V722C343 739.673 328.673 754 311 754H32C14.3269 754 0 739.673 0 722V32C0 14.3269 14.3269 0 32 0H34.9512C52.6243 0 66.9512 14.3269 66.9512 32V49.5898C66.9514 67.2628 81.2782 81.5898 98.9512 81.5898H242.951C260.624 81.5898 274.951 67.2628 274.951 49.5898V32C274.951 14.3269 289.278 0 306.951 0H311Z" fill="var(--fill-0, white)"/>
+<svg width="343" height="720" viewBox="0 0 343 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- mobile: card branco limpo (sem notch de logo no topo) -->
+  <path d="M32 0H311C328.673 0 343 14.3269 343 32V688C343 705.673 328.673 720 311 720H32C14.3269 720 0 705.673 0 688V32C0 14.3269 14.3269 0 32 0Z" fill="white"/>
 </svg>

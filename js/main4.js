@@ -35,68 +35,38 @@
   }, { passive: true });
   applyHeaderState();
 
-  /* diagnóstico: reveal frase a frase (palavras com stagger sutil) */
-  const diagText = document.querySelector('.diag-text');
   const motionOk = !matchMedia('(prefers-reduced-motion: reduce)').matches
     && !docEl.classList.contains('is-static');
 
-  if (diagText && motionOk && 'IntersectionObserver' in window) {
-    const fullText = diagText.textContent.replace(/\s+/g, ' ').trim();
-    const PHRASE_STEP = 0.26; /* s entre frases */
-    const WORD_STEP = 0.028;  /* s entre palavras da mesma frase */
-    let maxDelay = 0;
-
-    diagText.querySelectorAll('.ph').forEach((ph, pi) => {
-      let wi = 0;
-      /* percorre preservando wrappers internos (ex.: .hl-mark) */
-      const splitNode = (node) => {
-        if (node.nodeType === Node.ELEMENT_NODE) {
-          [...node.childNodes].forEach(splitNode);
-          return;
-        }
-        if (node.nodeType !== Node.TEXT_NODE) return;
-        const frag = document.createDocumentFragment();
-        node.textContent.split(/(\s+)/).forEach((token) => {
-          if (!token) return;
-          if (/^\s+$/.test(token)) {
-            frag.appendChild(document.createTextNode(' '));
-            return;
-          }
-          const w = document.createElement('span');
-          w.className = 'w';
-          w.textContent = token;
-          const d = pi * PHRASE_STEP + wi * WORD_STEP;
-          maxDelay = Math.max(maxDelay, d);
-          w.style.setProperty('--d', d.toFixed(3) + 's');
-          frag.appendChild(w);
-          wi += 1;
-        });
-        node.replaceWith(frag);
-      };
-      [...ph.childNodes].forEach(splitNode);
-      ph.setAttribute('aria-hidden', 'true');
-    });
-
-    diagText.dataset.split = '';
-
-    /* texto integral para leitores de tela (os spans ficam aria-hidden) */
-    const sr = document.createElement('span');
-    sr.className = 'sr-only';
-    sr.textContent = fullText;
-    diagText.prepend(sr);
-
-    const io = new IntersectionObserver((entries) => {
+  /* travando: grifa malva no título ao entrar na tela */
+  const travandoTitle = document.getElementById('travandoTitle');
+  if (travandoTitle && motionOk && 'IntersectionObserver' in window) {
+    const ioTrav = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        diagText.classList.add('in');
-        /* grifa só depois de TODAS as frases assentarem (última palavra + respiro) */
-        setTimeout(() => diagText.classList.add('hl-in'), (maxDelay + 0.55 + 0.15) * 1000);
-        io.disconnect();
+        travandoTitle.classList.add('hl-in');
+        ioTrav.disconnect();
       }
-    }, { threshold: .3 });
-    io.observe(diagText);
+    }, { threshold: .45 });
+    ioTrav.observe(travandoTitle);
+  } else if (travandoTitle) {
+    travandoTitle.classList.add('hl-in');
   }
 
-  /* frentes: accordion drop-down (exclusivo, sem modal) */
+  /* projetos: accordion drop-down (exclusivo, sem modal) */
+  const openFront = (front) => {
+    if (!front) return;
+    const list = front.closest('[data-accordion]');
+    if (!list) return;
+    const fronts = [...list.querySelectorAll('.front')];
+    const head = front.querySelector('.front-head');
+    fronts.forEach((f) => {
+      f.classList.remove('open');
+      f.querySelector('.front-head').setAttribute('aria-expanded', 'false');
+    });
+    front.classList.add('open');
+    head.setAttribute('aria-expanded', 'true');
+  };
+
   document.querySelectorAll('[data-accordion]').forEach((list) => {
     const fronts = [...list.querySelectorAll('.front')];
     fronts.forEach((front) => {
@@ -117,41 +87,31 @@
     });
   });
 
-  /* formatos: tabs com troca de foto + texto (hover, clique e teclado) */
-  const formatoTabs = [...document.querySelectorAll('.formato-tab')];
-  if (formatoTabs.length) {
-    const formatoImgs = [...document.querySelectorAll('.formato-img')];
-    const panel = document.getElementById('formatoPanel');
-    const info = panel.querySelector('.formato-info');
-    const nome = panel.querySelector('.formato-nome');
-    const desc = panel.querySelector('.formato-desc');
-    let current = 0;
-    let swapTimer = 0;
-
-    const select = (i) => {
-      if (i === current) return;
-      current = i;
-      formatoTabs.forEach((t, ti) => {
-        t.classList.toggle('is-active', ti === i);
-        t.setAttribute('aria-selected', String(ti === i));
-      });
-      formatoImgs.forEach((im, ii) => im.classList.toggle('is-active', ii === i));
-      panel.setAttribute('aria-labelledby', formatoTabs[i].id);
-      info.classList.add('swapping');
-      clearTimeout(swapTimer);
-      swapTimer = setTimeout(() => {
-        nome.textContent = formatoTabs[i].dataset.nome;
-        desc.textContent = formatoTabs[i].dataset.desc;
-        info.classList.remove('swapping');
-      }, 190);
-    };
-
-    formatoTabs.forEach((tab, i) => {
-      tab.addEventListener('click', (e) => { select(i); if (e.detail) tab.blur(); });
-      tab.addEventListener('mouseenter', () => select(i));
-      tab.addEventListener('focus', () => select(i));
+  /* chips de dor: levam ao projeto correspondente e abrem o accordion */
+  document.querySelectorAll('.pain-chip[data-front]').forEach((chip) => {
+    chip.addEventListener('click', (e) => {
+      const id = `front-${chip.dataset.front}`;
+      const front = document.getElementById(id);
+      if (!front) return;
+      e.preventDefault();
+      openFront(front);
+      front.scrollIntoView({ behavior: motionOk ? 'smooth' : 'auto', block: 'center' });
+      history.replaceState(null, '', `#${id}`);
     });
-  }
+  });
+
+  /* formatos: cards abrem modal (dialog nativo, estilo index2) */
+  document.querySelectorAll('[data-modal]').forEach((btn) => {
+    const dialog = document.getElementById(btn.dataset.modal);
+    if (!dialog || typeof dialog.showModal !== 'function') return;
+    btn.addEventListener('click', () => dialog.showModal());
+  });
+  document.querySelectorAll('dialog.fmt-modal').forEach((dialog) => {
+    dialog.querySelector('[data-close]')?.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+  });
 
   /* depoimentos: carrossel (setas no desktop, dots + swipe no mobile) */
   const depoStage = document.querySelector('.depo-stage');
@@ -161,22 +121,22 @@
         quote: 'A consultoria da Elevo tem agregado qualidade, foco e assertividade na condução das melhores estratégias para duas das minhas empresas, assim investimos a energia certa nos pontos com a probabilidade de maiores e melhores resultados. A partir de dados e organização acrescentamos leveza e performance. É a inteligência e a inovação trabalhando, qualidades, inclusive, que a Jéssica Fahl tem de sobra!',
         nome: 'Karen Sinnema',
         empresa: 'London Marcas e Patentes',
-        logo: './img/clientes/vector/london-white.svg',
-        logoW: 203, logoH: 55, tint: false
+        logo: './img/clientes/london.png',
+        logoW: 203, logoH: 55
       },
       {
         quote: 'Encerramos uma etapa importante de aperfeiçoamento das nossas práticas de gestão de pessoas. Reconhecemos a competência, a organização e a agilidade da Elevo na condução de todas as entregas.',
         nome: 'Henrique Tristão',
         empresa: 'Produsi Metalúrgica',
-        logo: './img/clientes/vector/produsi.svg',
-        logoW: 183, logoH: 38, tint: true
+        logo: './img/clientes/produsi.png',
+        logoW: 183, logoH: 38
       },
       {
         quote: 'A gente tinha a cabeça voltada só para as redes sociais. A Elevo trouxe uma visão mais ampla e estratégica para o negócio. Hoje entendemos que marketing vai além das redes.',
         nome: 'Guilherme Bittencourt',
         empresa: 'Fortmobile',
         logo: './img/clientes/fortmobile.png',
-        logoW: 150, logoH: 34, tint: true
+        logoW: 150, logoH: 34
       }
     ];
     const content = document.getElementById('depoContent');
@@ -205,7 +165,6 @@
         logoEl.src = d.logo;
         logoEl.width = d.logoW; logoEl.height = d.logoH;
         logoEl.alt = d.empresa;
-        logoEl.classList.toggle('logo-tint', d.tint);
         content.classList.remove('swapping');
         logoEl.style.opacity = '1';
         depoBusy = false;
@@ -334,13 +293,14 @@
     }
   }
 
-  /* footer: máscara de telefone + envio do lead para o WhatsApp */
-  const footerForm = document.getElementById('footerLeadForm');
-  if (footerForm) {
-    const phoneInput = document.getElementById('footerPhone');
+  /* formulário de lead (seção agendar): máscara + envio via WhatsApp */
+  const leadForm = document.getElementById('leadForm');
+  if (leadForm) {
+    const phoneInput = document.getElementById('leadPhone');
+    const msgEl = document.getElementById('leadFormMsg');
 
-    phoneInput.addEventListener('input', () => {
-      const digits = phoneInput.value.replace(/\D/g, '').slice(0, 11);
+    const maskPhone = (value) => {
+      const digits = value.replace(/\D/g, '').slice(0, 11);
       const ddd = digits.slice(0, 2);
       const first = digits.slice(2, 7);
       const last = digits.slice(7, 11);
@@ -348,22 +308,49 @@
       if (ddd.length === 2) formatted += ') ';
       formatted += first;
       if (last) formatted += `-${last}`;
-      phoneInput.value = formatted;
-    });
+      return formatted;
+    };
 
-    footerForm.addEventListener('submit', (event) => {
+    if (phoneInput) {
+      phoneInput.addEventListener('input', () => {
+        phoneInput.value = maskPhone(phoneInput.value);
+      });
+    }
+
+    const showMsg = (text, kind) => {
+      if (!msgEl) return;
+      msgEl.hidden = false;
+      msgEl.textContent = text;
+      msgEl.classList.toggle('is-error', kind === 'error');
+      msgEl.classList.toggle('is-ok', kind === 'ok');
+    };
+
+    leadForm.addEventListener('submit', (event) => {
       event.preventDefault();
-      if (!footerForm.checkValidity()) {
-        footerForm.reportValidity();
+      const data = new FormData(leadForm);
+      const nome = String(data.get('nome') || '').trim();
+      const telefone = String(data.get('telefone') || '').trim();
+      const email = String(data.get('email') || '').trim();
+
+      if (!nome) {
+        showMsg('Escreva o seu nome.', 'error');
+        document.getElementById('leadName')?.focus();
+        return;
+      }
+      if (telefone.replace(/\D/g, '').length < 10) {
+        showMsg('Confira o número - falta um dígito.', 'error');
+        phoneInput?.focus();
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showMsg('Confira o e-mail - parece faltar o @.', 'error');
+        document.getElementById('leadEmail')?.focus();
         return;
       }
 
-      const data = new FormData(footerForm);
-      const nome = String(data.get('nome')).trim();
-      const empresa = String(data.get('empresa')).trim();
-      const telefone = String(data.get('telefone')).trim();
-      const message = `Olá, equipe ELEVO! Meu nome é ${nome}. Atuo em ${empresa}. Meu telefone é ${telefone}. Quero conversar sobre o próximo passo da empresa.`;
+      const message = `Olá, equipe elevo! Meu nome é ${nome}. Meu telefone é ${telefone} e meu e-mail é ${email}. Quero conversar sobre a empresa.`;
       const url = `https://wa.me/5543991588212?text=${encodeURIComponent(message)}`;
+      showMsg('Contato enviado. A gente retorna em breve.', 'ok');
       window.open(url, '_blank', 'noopener,noreferrer');
     });
   }
